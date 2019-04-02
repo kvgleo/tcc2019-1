@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Auth\AuthenticationException;
 
 class Handler extends ExceptionHandler
 {
@@ -47,5 +48,26 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $exception)
     {
         return parent::render($request, $exception);
+    }
+
+    protected function unauthenticated($request, AuthenticationException $exception){ //aqui redireciona para as paginas de logins correspondentes à rota de acesso (Admin ou User);
+        if($request->expectsJson()){
+            return response()->json(['message'=>$exception->getMessage()], 401); // bloquear caso requisição ser feita por dispositivo móvel;
+        }
+        $guard = array_get($exception->guards(),0);
+        
+        switch($guard){
+            case 'admin':
+                $login = "admin_login";
+                break;
+            case 'web':
+                $login = "login";
+                break;
+            default:
+                $login = "login";
+                break;
+        }
+        return redirect()->guest(route($login));
+
     }
 }
