@@ -15,8 +15,8 @@ class AdminC extends Controller{
         return view('adm.home_admin');
     }
 
-    public function financas(){
-        return view('adm.home_admin');
+    public function anuncios(){
+        return view('adm.anuncios');
     }
 
 

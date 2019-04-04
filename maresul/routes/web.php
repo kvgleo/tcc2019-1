@@ -25,4 +25,14 @@ Route::post('/a/l', 'Auth\LoginAdminC@login')->name('admin_login_submit'); //hom
 
 Route::get('/a/h', 'AdminC@index')->middleware('auth:admin')->name('admin_home'); //home admin
 
-//Route::get('/a/f', 'FinancasC@index')->middleware('auth:admin')->name('admin_financas'); //home admin
+//rotas para anuncio
+
+Route::get('/a/a', 'AnunciosC@index')->middleware('auth:admin')->name('admin_anuncios'); //anunciosGet
+
+Route::post('/a/a', 'AnunciosC@store')->middleware('auth:admin')->name('admin_anuncios_submit'); //anunciosPost
+
+Route::get('/a/a/d/{id}', 'AnunciosC@destroy')->middleware('auth:admin')->name('admin_anuncios_del'); //anunciosGet
+
+Route::post('/a/a/e/{id}', 'AnunciosC@update')->middleware('auth:admin')->name('admin_anuncios_edit'); //anunciosGet
+
+//rota teste:
