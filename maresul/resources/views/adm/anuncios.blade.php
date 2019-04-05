@@ -1,17 +1,18 @@
 <html>
 <head>
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
 </head>
 <body>
+<div id='app'>
 <h2> Logado como administrador </h2>
 <h5> Olá {{ Auth::user()->email }} </h5>
 
 <a href="/a/h">Voltar</a>
 <h1>ANUNCIAMENTOS/COMUNICADOS</h1>
-<button type="button" class="btn btn-danger"data-toggle="modal" data-target="#createModal">Novo anuncio</button>
+<button  type="button" onclick="clear_input()" class="btn btn-danger" data-toggle="modal" data-target="#createModal">Novo anuncio</button>
 
 
 @foreach($anuncios as $a)
@@ -86,27 +87,36 @@
             <h4 class="modal-title">NOVO ANUNCIO</h4>
             </div>
             <div class="modal-body">
-                <form id="formAnuncio" action="/a/a" method="POST" >
+                <form id="formAnuncio" action="/a/a" method="POST">
                     @csrf
-                    <input type="text" placeholder="titulo" name="tit">
+                    <input type="text" placeholder="titulo" name="tit" id="tit" required>
                     <br>
-                    <textarea row="4" placeholder="descriçao" name="desc"></textarea>
+                    <textarea row="4" placeholder="descriçao" name="desc" id="desc" required></textarea>
                     <br>
-                    <input type="text" placeholder="observações" name="obs">
+                    <input type="text" placeholder="observações" name="obs" id="obs" required>
                     <br>
+                </form>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-danger">Salvar</button> 
-                </form>
-            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button form="formAnuncio"type="submit" class="btn btn-danger">Salvar</button> 
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
             </div>
         </div>
     </div>
 </div>
+</div>
             
          
-
+    <script src="{{ asset('js/app.js') }}"></script>
     <script type="text/javascript">
+
+    function clear_input(){
+        document.getElementById("tit").value = "";
+        document.getElementById("desc").value = "";
+        document.getElementById("obs").value = "";
+
+    }
+
     function edit(id,tit,desc,ps){
         document.getElementById("formEdit").action = "a/e/"+ id;
         document.getElementById("titEdit").value = tit;

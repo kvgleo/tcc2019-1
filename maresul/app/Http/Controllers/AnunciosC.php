@@ -18,12 +18,6 @@ class AnunciosC extends Controller
   
     }
 
-
-    public function create()
-    {
-        //
-    }
-
     public function store(Request $request) //criar novo anuncio
     {
         $anuncio = new Anuncio();
@@ -35,24 +29,6 @@ class AnunciosC extends Controller
         $anuncio->save();
         return  redirect('a/a');
     }
-
-   
-    public function show($id)
-    {
-        //
-    }
-
-
-    public function edit($id){ //editar anuncio e redirecionar para outra view
-        /*$anuncio = Anuncio::find($id);
-         if(isset($anuncio)){
-             return view('editar', compact($anuncio));
-            }else{
-                return $this->index();
-            }
-        //*/
-    }
-
 
     public function update(Request $request, $id)
     {

@@ -10,7 +10,7 @@
     <li><b>Administrativo</b></li>
     <li><a href="/a/a">Anúncios</a></li>
     <li><a href="#">Reservas</a></li>
-    <li><a href="#">Documentos</a></li>
+    <li><a href="/a/d">Documentos</a></li>
     <li><b>Social</b></li>
     <li><a href="#">Fórum</a></li>
     <li><a href="#">Estatisticas</a></li>
