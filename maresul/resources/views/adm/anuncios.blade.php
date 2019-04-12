@@ -30,10 +30,6 @@
 
 {{$anuncios ->links()}}
 
-<div>
-
-</div>
-  
   
       
 <!-- Modal EDITAR-->
@@ -52,10 +48,11 @@
                     <br>
                     <input type="text" placeholder="observações" name="obsEdit" id="obsEdit">
                     <br>
+                    </form>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-danger">Salvar</button>
-                </form>
+                <button type="submit" form="formEdit"class="btn btn-danger">Salvar</button>
+                
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>

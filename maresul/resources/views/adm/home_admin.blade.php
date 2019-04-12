@@ -9,7 +9,7 @@
     <li><a href="#">Historico</a></li>
     <li><b>Administrativo</b></li>
     <li><a href="/a/a">Anúncios</a></li>
-    <li><a href="#">Reservas</a></li>
+    <li><a href="/reservas">Reservas</a></li>
     <li><a href="/a/d">Documentos</a></li>
     <li><b>Social</b></li>
     <li><a href="#">Fórum</a></li>
@@ -22,7 +22,7 @@
 <ul>
     <li><a href="#">Regras</a></li>
     <li><a href="#">Ajuda</a></li>
-    <li><a href="#">Lembretes</a></li>
+    <li><a href="/a/le">Lembretes</a></li>
     <li> <a href="{{ route('logout') }}"onclick="event.preventDefault();document.getElementById('logout-form').submit();">Sair</a></li>
 </ul>
 
