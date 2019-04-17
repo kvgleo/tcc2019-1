@@ -10,9 +10,9 @@
         @if ($errors->any())
             <div class="alert alert-danger" role="alert"><h2>{{$errors->first()}}</h2></div>
         @endif
-            @if(Session::has('success'))
+        @if(Session::has('msg'))
             <div class="alert-box success">
-                    <div class="alert alert-success">{{ Session::get('success') }}</div> 
+                    <div class="alert alert-success">{{ Session::get('msg') }}</div> 
             </div>
         @endif
         <table class="table table-hover">

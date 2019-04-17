@@ -45,7 +45,7 @@ class ReservasC extends Controller{
         $reserva->id_user=  Auth::user()->id;
         $reserva->local_targ= $request->input('local');
         $reserva->save();
-        return  redirect('/reservas')->with('success', 'Sua reserva foi adicionada!');;
+        return  redirect('/reservas')->with('msg', 'Sua reserva foi adicionada!');
 
         }catch(\Exception $e){ //burlar acesso redireciona para página de login
 
@@ -63,7 +63,7 @@ class ReservasC extends Controller{
                     $reserva= Reserva::find($id);
                     if(isset($reserva)){ 
                         $reserva->delete(); 
-                        return redirect('/reservas')->with('success', 'Reserva cancelada!');
+                        return redirect('/reservas')->with('msg', 'Reserva cancelada!');
                         } 
                     return redirect('/reservas')->withErrors('Erro: Não foi possível cancelar a reserva');
                 }catch(\Exception $e){ //caso remoção de erro no banco
@@ -75,7 +75,7 @@ class ReservasC extends Controller{
                         $reserva= Reserva::find($id);
                         if(isset($reserva)){ 
                             $reserva->delete();
-                            return redirect('/reservas')->with('success', 'Sua reserva foi cancelada!'); 
+                            return redirect('/reservas')->with('msg', 'Sua reserva foi cancelada!'); 
                             }
                         return redirect('/reservas')->withErrors('Erro: Não foi possível cancelar a reserva');
                     }catch(\Exception $e){ //caso remoção de erro no banco

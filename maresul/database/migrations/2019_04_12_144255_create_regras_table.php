@@ -15,6 +15,10 @@ class CreateRegrasTable extends Migration
     {
         Schema::create('regras', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('title');
+            $table->longText('desc');
+            $table->date('reportdate');
+            $table->string('author');
             $table->timestamps();
         });
     }
