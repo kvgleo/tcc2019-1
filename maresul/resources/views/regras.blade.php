@@ -8,18 +8,19 @@
 
 <div id='app'>
 
-@if($perguntas[0]==null)
+@if($regras[0]==null)
 <h1>Não há conteudo nesta seção até o momento</h1>
 @endif
 
 <a href="/home" class="btn btn-primary">Voltar</a>
 
-@foreach($perguntas as $p)
-<hr>
-<h3>{{$p->question}}</h3>
-<h5>{{$p->answer}}</h5>
-<hr>
+@foreach($regras as $re)
+<h3>{{$re->title}}</h3>
+<h5>{{$re->desc}}</h5>
+<h6>{{$re->reportdate}}</h6>
+<h6>{{$re->author}}</h6>
 @endforeach
+{{$regras->links()}}
 
 <script src="{{ asset('js/app.js') }}"></script>
 

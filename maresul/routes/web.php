@@ -60,7 +60,14 @@ Route::get('/reservas/del/{id}/{id_user}', 'ReservasC@destroy')->middleware('aut
 
 //rotas para regras:
 
-Route::get('/regras', 'RegrasC@index')->middleware('auth:web,admin')->name('regras'); //pagina de reservas (modificado para os tipos de usuarios)
-Route::post('/regras', 'RegrasC@store')->middleware('auth:admin')->name('regras_criar'); //armazenar nova reserva
-Route::get('/regras/delete/{id}', 'RegrasC@destroy')->middleware('auth:admin')->name('regras_del'); //deletar reserva
-Route::post('/regras/edit/{id}', 'RegrasC@update')->middleware('auth:admin')->name('regras_edit'); //atualizar anuncio
+Route::get('/regras', 'RegrasC@index')->middleware('auth:web,admin')->name('regras'); //pagina de regras (modificado para os tipos de usuarios)
+Route::post('/regras', 'RegrasC@store')->middleware('auth:admin')->name('regras_criar'); //armazenar nova regra
+Route::get('/regras/delete/{id}', 'RegrasC@destroy')->middleware('auth:admin')->name('regras_del'); //deletar regra
+Route::post('/regras/edit/{id}', 'RegrasC@update')->middleware('auth:admin')->name('regras_edit'); //atualizar regra
+
+//rotas para regras:
+
+Route::get('/ajuda', 'PerguntasC@index')->middleware('auth:web,admin')->name('ajuda'); //pagina de perguntas (modificado para os tipos de usuarios)
+Route::post('/ajuda', 'PerguntasC@store')->middleware('auth:admin')->name('pergunta_criar'); //armazenar nova pergunta
+Route::get('/ajuda/delete/{id}', 'PerguntasC@destroy')->middleware('auth:admin')->name('pergunta_del'); //deletar pergunta
+Route::post('/ajuda/edit/{id}', 'PerguntasC@update')->middleware('auth:admin')->name('pergunta_edit'); //atualizar pergunta

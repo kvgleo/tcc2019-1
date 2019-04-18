@@ -51,21 +51,21 @@
     <li><a href="#">Estatisticas</a></li>
     <li><a href="#">Historico</a></li>
     <li><b>Administrativo</b></li>
-    <li><a href="/a/a">Anúncios</a></li>
-    <li><a href="/reservas">Reservas</a></li>
-    <li><a href="/a/d">Documentos</a></li>
+    <li><a href="/a/a">Anúncios</a> (completo)</li>
+    <li><a href="/reservas">Reservas </a> (completo)</li>
+    <li><a href="/a/d">Documentos </a> (completo)</li>
     <li><b>Social</b></li>
     <li><a href="#">Fórum</a></li>
-    <li><a href="#">Estatisticas</a></li>
-    <li><a href="#">Historico</a></li>
+    <li><a href="#">Mural</a></li>
+    <li><a href="#">Comunidade</a></li>
     
 </ul>
 
 
 <ul>
-    <li><a href="/regras">Regras</a></li>
-    <li><a href="#">Ajuda</a></li>
-    <li><a href="/a/le">Lembretes</a></li>
+    <li><a href="/regras">Regras</a> (completo)</li>
+    <li><a href="/ajuda">Ajuda </a> (completo)</li>
+    <li><a href="/a/le">Lembretes</a> (completo)</li>
     <li> <a href="{{ route('logout') }}"onclick="event.preventDefault();document.getElementById('logout-form').submit();">Sair</a></li>
 </ul>
 

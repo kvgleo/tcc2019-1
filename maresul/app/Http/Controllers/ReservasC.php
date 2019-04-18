@@ -11,19 +11,16 @@ class ReservasC extends Controller{
 
 
     public function index(){
+        
+        $reservas = DB::table('reservas')
+                    ->join('users', 'users.id', '=', 'reservas.id_user',)
+                    ->select('reservas.*', 'users.*','reservas.id','reservas.created_at')->orderBy('reservas.created_at', 'desc')->paginate(5);
         try{
             $auth= Auth::user()->isAdmin;
             if($auth==true){ //retornar view para admin
-                $reservas = DB::table('reservas')
-                    ->join('users', 'users.id', '=', 'reservas.id_user',)
-                    ->select('reservas.*', 'users.*','reservas.id','reservas.created_at')->orderBy('reservas.created_at', 'desc')->paginate(5);
-                    return view('adm.reservas',compact('reservas'));
+                return view('adm.reservas',compact('reservas'));
                  
             }else{ //retornar view para usuario
-                    $reservas = DB::table('reservas')
-                    ->join('users', 'users.id', '=', 'reservas.id_user')
-                    ->select('reservas.*', 'users.*','reservas.id','reservas.created_at')->orderBy('reservas.created_at', 'desc')->get();
-                    return view('reservas',compact('reservas'));
         
                 return view('reservas',compact('reservas'));
 

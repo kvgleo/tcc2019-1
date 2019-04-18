@@ -2,16 +2,16 @@
 <h5> Olá {{ Auth::user()->name }} </h5>
 
 <ul>
-    <li><a href="/a/le">Lembretes</a></li>
-    <li><a href="#">Regras</a></li>
-    <li><a href="#">Ajuda</a></li>
+    <li><a href="/a/le">Recado</a></li> 
+    <li><a href="/regras">Regras</a>(COMPLETO)</li>
+    <li><a href="/ajuda">Ajuda (COMPLETO)</a></li>
     <li> <a href="{{ route('logout') }}"onclick="event.preventDefault();document.getElementById('logout-form').submit();">Sair</a></li>
 </ul>
 
 <ul>
     <li></li>
     <li><a href="#">Forum</a></li>
-    <li><a href="/reservas">Reservas</a></li>
+    <li><a href="/reservas">Reservas</a> (COMPLETO)</li>
     <li><a href="#">Comunidade</a></li>
 
 </ul>

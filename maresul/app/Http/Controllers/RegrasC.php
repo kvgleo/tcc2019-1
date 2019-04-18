@@ -5,12 +5,26 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Regra;
 use Illuminate\Support\Facades\DB;
+use Auth;
 class RegrasC extends Controller{
 
     public function index(){
         $regras = new Regra();
         $regras= DB::table('regras')->orderBy('created_at', 'desc')->paginate(2);         
-        return view('adm.regras',compact('regras'))->with('msg', 'Nenhuma regra adicionada até o momento');
+        try{
+            $auth= Auth::user()->isAdmin;
+            if($auth==true){ //retornar view para admin
+                return view('adm.regras',compact('regras'));
+                 
+            }else{ //retornar view para usuario
+
+                return view('regras',compact('regras'));
+
+            }
+        }catch(\Exception $e){ //burlar acesso redireciona para página de login
+
+            return redirect('/login');
+        }
 
         
     }
