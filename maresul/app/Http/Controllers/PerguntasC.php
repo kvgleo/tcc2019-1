@@ -12,7 +12,7 @@ class PerguntasC extends Controller
     public function index(){
 
         $perguntas = new Pergunta();
-        $perguntas= DB::table('perguntas')->orderBy('created_at', 'desc')->paginate(2);  
+        $perguntas= DB::table('perguntas')->orderBy('created_at', 'desc')->paginate(4);  
 
         try{
             $auth= Auth::user()->isAdmin;
@@ -35,7 +35,7 @@ class PerguntasC extends Controller
         $perg->question= $request->input('perg');
         $perg->answer= $request->input('resp');
         $perg->save();
-        return redirect('/ajuda')->with('msg', 'Nova pergunta adicionada');
+        return redirect('/ajuda')->with('msg', 'Uma nova informação foi adicionada!');
     }
 
     public function update(Request $request,$id){
@@ -46,9 +46,9 @@ class PerguntasC extends Controller
             $perg->question=$request->input('pergEdit');
             $perg->answer=$request->input('respEdit');
             $perg -> save(); 
-            return  redirect('/ajuda')->with('msg', 'Pergunta Atualizada');
+            return  redirect('/ajuda')->with('msg', 'Informação atualizada!');
             }catch(\Exception $e){
-                return  redirect('/ajuda')->with('avs','não foi atualizar remover o item desejado.');;
+                return  redirect('/ajuda')->with('avs','Não foi atualizar o item desejado.');
             }  
         }
         return  redirect('/ajuda');
@@ -56,12 +56,13 @@ class PerguntasC extends Controller
 
     public function destroy($id){ //remover anuncio e redirecionar para pagina principal.
         $perg= Pergunta::find($id);
-         if(isset($perg)){ 
+        if(isset($perg)){ 
              try{
              $perg->delete(); 
-             return  redirect('/ajuda')->with('avs', 'Pergunta Removida');
+             return  redirect('/ajuda')->with('avs', 'A informação foi excluida!');
+
             }catch(\Exception $e){
-                return  redirect('/ajuda')->with('avs','não foi possível remover o item desejado.');
+                return  redirect('/ajuda')->with('avs','Não foi possível remover o item desejado.');
             }
         } 
         return  redirect('/ajuda');

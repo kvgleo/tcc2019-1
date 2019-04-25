@@ -115,13 +115,13 @@
     }
 
     function edit(id,tit,desc,ps){
-        document.getElementById("formEdit").action = "a/e/"+ id;
+        document.getElementById("formEdit").action = "anuncios/edit/"+ id;
         document.getElementById("titEdit").value = tit;
         document.getElementById("descEdit").value = desc;
         document.getElementById("obsEdit").value = ps;
     }
     function confirm(id){
-        document.getElementById("excluir").href = "a/d/"+ id;
+        document.getElementById("excluir").href = "anuncios/del/"+ id;
 
     }
 

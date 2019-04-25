@@ -11,7 +11,7 @@
     <form class="form-signin col-md-3  mx-auto" style="margin-top:100px;" method="POST" action="{{ route('admin_login_submit') }}">
         @csrf
 
-      <img class="mb-4" src="https://cdn.icon-icons.com/icons2/1154/PNG/512/1486564389-lock-red_81516.png" alt="" width="72" height="72">
+      <img class="mb-4" src="{{Storage::url('banner/icon_adm.png') }}" alt="" width="72" height="72">
 
       <h1 class="h3 mb-3 font-weight-normal">Login Administrativo</h1>
       <p class=" mb-3 font-weight-normal">Entre com as credenciais corretas para acessar a parte interna do sistema.</p>

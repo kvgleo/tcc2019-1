@@ -14,7 +14,7 @@ class LembretesC extends Controller{
 
     public function index(){
         
-        $lembretes = DB::table('lembretes')->orderBy('created_at', 'desc')->paginate(2); //listar anuncios por ordem de criação e paginados
+        $lembretes = DB::table('lembretes')->orderBy('created_at', 'desc')->paginate(10); //listar anuncios por ordem de criação e paginados
         return view('adm.lembretes', ['lembretes' => $lembretes]);
   
     }
@@ -27,32 +27,36 @@ class LembretesC extends Controller{
         $lembrete->lemb_desc= $request->input('lemb_desc');
         $lembrete->reportdate= Carbon::now();
         $lembrete->save();
-        return  redirect('a/le');
+        return  redirect('/lembretes')->with('msg', 'Um novo lembrete foi adicionado!');
     }
 
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id){
         $lembrete = Lembrete::find($id);
-
         if(isset($lembrete)){
+            try{
             $lembrete->lemb_title=$request->input('titEdit');
             $lembrete->lemb_desc=$request->input('descEdit');
             $lembrete->reportdate= Carbon::now();
             $lembrete -> save(); 
-            return  redirect('a/le');
-
-            }else {
-
-                return "erro";
-            }
+            return  redirect('/lembretes')->with('msg', 'Lembrete atualizado!');
+            }catch(\Exception $e){
+                return  redirect('/lembretes')->with('avs','Não foi atualizar o item desejado.');
+            }  
+        }
+        return redirect('/lembretes');
     }
 
 
     public function destroy($id){ //remover anuncio e redirecionar para pagina principal.
         $lembrete= Lembrete::find($id);
          if(isset($lembrete)){ 
+            try{
              $lembrete->delete(); 
+             return  redirect('/lembretes')->with('avs','O lembrete foi removido!');
+            }catch(\Exception $e){
+                return  redirect('/lembretes')->with('avs','Não foi possível remover o item desejado.');
+            }
         } 
-        return  redirect('a/le');
+        return  redirect('/lembretes');
     }
 }

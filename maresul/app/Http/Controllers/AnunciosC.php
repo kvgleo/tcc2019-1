@@ -27,7 +27,7 @@ class AnunciosC extends Controller
         $anuncio->reportdate= Carbon::now();
         $anuncio->ps= $request->input('obs');
         $anuncio->save();
-        return  redirect('a/a');
+        return  redirect('/anuncios');
     }
 
     public function update(Request $request, $id)
@@ -38,7 +38,7 @@ class AnunciosC extends Controller
             $anuncio->description=$request->input('descEdit');
             $anuncio->ps=$request->input('obsEdit');
             $anuncio -> save(); 
-            return  redirect('a/a');
+            return  redirect('/anuncios');
             }else {
                 return "erro";
             }
@@ -50,6 +50,6 @@ class AnunciosC extends Controller
          if(isset($anuncio)){ 
              $anuncio->delete(); 
         } 
-        return  redirect('a/a');
+        return  redirect('/anuncios');
     }
 }

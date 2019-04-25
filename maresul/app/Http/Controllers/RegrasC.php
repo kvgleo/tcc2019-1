@@ -10,7 +10,7 @@ class RegrasC extends Controller{
 
     public function index(){
         $regras = new Regra();
-        $regras= DB::table('regras')->orderBy('created_at', 'desc')->paginate(2);         
+        $regras= DB::table('regras')->orderBy('created_at', 'desc')->paginate(4);         
         try{
             $auth= Auth::user()->isAdmin;
             if($auth==true){ //retornar view para admin
@@ -35,7 +35,7 @@ class RegrasC extends Controller{
         $regra->reportdate= $request->input('dat');
         $regra->author= $request->input('aut');
         $regra->save();
-        return redirect('/regras')->with('msg', 'Nova regra adicionada');
+        return redirect('/regras')->with('msg', 'Nova regra adicionada!');
     }
 
     public function update(Request $request,$id){
@@ -48,9 +48,9 @@ class RegrasC extends Controller{
             $regra->reportdate=$request->input('datEdit');
             $regra->author=$request->input('autEdit');
             $regra -> save(); 
-            return  redirect('/regras')->with('msg', 'Regra Atualizada');
+            return  redirect('/regras')->with('msg', 'A regra foi Atualizada');
             }catch(\Exception $e){
-                return  redirect('/regras');
+                return  redirect('/regras')->with('avs','Não foi atualizar o item desejado.');
             }  
         }
         return  redirect('/regras');
@@ -61,9 +61,9 @@ class RegrasC extends Controller{
          if(isset($regra)){ 
              try{
              $regra->delete(); 
-             return  redirect('/regras')->with('avs', 'Regra Removida');
+             return  redirect('/regras')->with('avs', 'Regra excluida!');
             }catch(\Exception $e){
-                return  redirect('/regras');
+                return  redirect('/regras')->with('avs','Não foi possível remover o item desejado.');
             }
         } 
         return  redirect('/regras');
