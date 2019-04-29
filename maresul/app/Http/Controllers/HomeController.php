@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Anuncio;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $anuncios = DB::table('anuncios')->orderBy('created_at', 'desc')->get();
+        return view('home',['anuncios' => $anuncios]);
     }
 }

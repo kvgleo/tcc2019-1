@@ -31,7 +31,7 @@
     </div>
     <nav aria-label="breadcrumb" style="margin-top:-25px;">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
             <li class="breadcrumb-item active" >Lembretes</li>
         </ol>
     </nav>
@@ -50,7 +50,7 @@
     @endif
 
 
-        <div class="card col-md-6 " style="margin-bottom:20px; border:none; float:left; max-height:520px; margin-right:30px; overflow-y: auto; ">
+        <div class="card col-md-6 " style="margin-bottom:20px; background:none; border:none; float:left; max-height:520px; margin-right:30px; overflow-y: auto; ">
           <div class="card-body">
             <div class="row">
               <div class="col-12">
@@ -74,7 +74,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" onclick="edit('{{$l->id}}','{{$l->lemb_title}}', '{{$l->lemb_desc}}')"  data-toggle="modal" data-target="#editModal"><i class="fa fa-pen"></i></button> 
-                    <button type="button" class="btn btn-outline-danger" onclick="confirm('{{$l->id}}')" class = "btn btn-danger" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash"></i></button>
+                    <button type="button" class="btn btn-outline-danger" onclick="confirm('{{$l->id}}')" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash"></i></button>
                 </div>
             </div>
             @endforeach

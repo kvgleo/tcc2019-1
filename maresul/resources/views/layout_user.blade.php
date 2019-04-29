@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 </head>
 
+
 <body>
 
         <nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color:#3a79e0;">
@@ -42,6 +43,8 @@
                         </li>
                   </ul>
                 </div>
+
+                @yield('warn-content')
               </nav>
 
               <div class="modal fade" id="createModal" role="dialog">
@@ -78,7 +81,7 @@
                 @yield('main-content')
               </main>
 
-              <footer class="container">
+              <footer class="container bottom">
                     <p>&copy; MAR&SUL 2014-2019</p>
                   </footer>
               

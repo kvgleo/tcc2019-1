@@ -50,7 +50,7 @@
                         <b class="card-text">{{$re->title}} </b>
                             <button class="btn btn-link collapsed " style="font-size:20px; float:right"data-toggle="collapse" data-target="#c{{$re->id}}" aria-expanded="false" aria-controls="{{$re->id}}"><i class="fa fa-angle-down"></i></button>  
                         </h3>
-                    <p class="card-text"><small class="text-muted"> criado em {{date('d-m-Y', strtotime($re->created_at))}}</small></p>
+                    <p class="card-text"><small class="text-muted"> postado em {{date('d-m-Y', strtotime($re->created_at))}}</small></p>
                     </div>
                     <div id="c{{$re->id}}" class="collapse" aria-labelledby="ac{{$re->id}}" data-parent="#accordion">
                         <div class="card-body">
