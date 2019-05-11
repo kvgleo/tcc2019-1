@@ -12,7 +12,7 @@ class PerguntasC extends Controller
     public function index(){
 
         $perguntas = new Pergunta();
-        $perguntas= DB::table('perguntas')->orderBy('created_at', 'desc')->paginate(4);  
+        $perguntas= DB::table('perguntas')->orderBy('created_at', 'desc')->paginate(5);  
 
         try{
             $auth= Auth::user()->isAdmin;
@@ -29,6 +29,32 @@ class PerguntasC extends Controller
             return redirect('/login');
         }
        
+    }
+    public function search(Request $request){
+
+        if($request->input('buscar') == null){
+            return redirect('/ajuda');
+        }
+        $word=$request->input('buscar');
+        $perguntas = new Pergunta();
+        $perguntas= DB::table('perguntas')->where('question','like','%'.$word.'%')->orderBy('created_at', 'desc')->paginate(5);
+        $pagination = $perguntas->appends ( array (
+            'buscar' => $request->input('buscar')
+          ) );         
+        try{
+            $auth= Auth::user()->isAdmin;
+            if($auth==true){ //retornar view para admin
+                return view('adm.ajuda',compact('perguntas'))->with('src','busca');
+                 
+            }else{ //retornar view para usuario
+
+                return view('ajuda',compact('perguntas'))->with('src','busca');
+
+            }
+        }catch(\Exception $e){ //burlar acesso redireciona para página de login
+
+            return redirect('/login');
+        }
     }
     public function store(Request $request){
         $perg= new Pergunta();

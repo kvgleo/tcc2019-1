@@ -37,8 +37,10 @@
                     </div>
                 </div>
           </nav>
-          <div class="card col-md-7 " style="margin-bottom:20px; float:left; background:none; border:none; max-height:520px; overflow-y: auto; ">
-          <table class="table table-hover">
+          <div id="testetable"class="card col-md-7 " style="margin-bottom:20px; float:left; background:none; border:none; ">
+            <input type="text" class="form-control" id="testeinput" placeholder="Pesquisar..." style="height:50px;">
+            <div class="card" style=" max-height:500px; overflow-y: auto; margin-top:10px;">
+          <table class="table table-hover" style="">
               <thead>
                 <tr>
                     <th scope="col">Local</th>
@@ -64,8 +66,8 @@
 
               </tbody>
             </table>
-            {{$reservas->links()}}
             </div>
+        </div>
 
             <div class="card col-md-5 " style="margin-bottom:20px; border:none; background:none;">
 
@@ -116,7 +118,20 @@
 @endsection
 
 @section('js-content')
+
 <script type="text/javascript">
+
+    
+    $(document).ready(function(){
+      $("#testeinput").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#testetable tr").filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+    });
+
+
 
           $(function() {
     $('#reservas').addClass('btn-danger');

@@ -10,7 +10,7 @@ class RegrasC extends Controller{
 
     public function index(){
         $regras = new Regra();
-        $regras= DB::table('regras')->orderBy('created_at', 'desc')->paginate(4);         
+        $regras= DB::table('regras')->orderBy('created_at', 'desc')->paginate(5);         
         try{
             $auth= Auth::user()->isAdmin;
             if($auth==true){ //retornar view para admin
@@ -25,9 +25,35 @@ class RegrasC extends Controller{
 
             return redirect('/login');
         }
-
-        
     }
+
+    public function search(Request $request){
+
+        if($request->input('buscar') == null){
+            return redirect('/regras');
+        }
+        $word=$request->input('buscar');
+        $regras = new Regra();
+        $regras= DB::table('regras')->where('title','like','%'.$word.'%')->orderBy('created_at', 'desc')->paginate(5);
+        $pagination = $regras->appends ( array (
+            'buscar' => $request->input('buscar')
+          ) );         
+        try{
+            $auth= Auth::user()->isAdmin;
+            if($auth==true){ //retornar view para admin
+                return view('adm.regras',compact('regras'))->with('src','busca');
+                 
+            }else{ //retornar view para usuario
+
+                return view('regras',compact('regras'))->with('src','busca');
+
+            }
+        }catch(\Exception $e){ //burlar acesso redireciona para página de login
+
+            return redirect('/login');
+        }
+    }
+
     public function store(Request $request){
         $regra= new Regra();
         $regra->title= $request->input('tit');
@@ -58,6 +84,9 @@ class RegrasC extends Controller{
 
     public function destroy($id){ //remover anuncio e redirecionar para pagina principal.
         $regra= Regra::find($id);
+        $regra->delete(); 
+        return  redirect('/regras')->with('avs', 'Regra excluida!');
+        /*$regra= Regra::find($id);
          if(isset($regra)){ 
              try{
              $regra->delete(); 
@@ -66,6 +95,6 @@ class RegrasC extends Controller{
                 return  redirect('/regras')->with('avs','Não foi possível remover o item desejado.');
             }
         } 
-        return  redirect('/regras');
+        return  redirect('/regras');*/
     }
 }

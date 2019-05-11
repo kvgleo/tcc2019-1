@@ -28,57 +28,83 @@
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-5 border-bottom">
     <h1 class="h2">Regras de Convivência</h1>
     <div class="mb-2">
-        <button  type="button" onclick="clear_input()"class="btn btn-outline-danger"data-toggle="modal" data-target="#createModal"><i class="fa fa-plus"></i></button>
+        <button  type="button" onclick="clear_input()"class="btn btn-outline-danger btn-lg"data-toggle="modal" data-target="#createModal"><i class="fa fa-plus"></i></button>
     </div>
     </div>
     <nav aria-label="breadcrumb" style="margin-top:-25px;">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
-            <li class="breadcrumb-item active" >Regras de Convivência</li>
+            <li class="breadcrumb-item active " >Regras de Convivência</li>
         </ol>
     </nav>
-    <div class="card" style="margin-bottom:20px;">
+    <div class="card col-md-12" style="float: left; margin-bottom:20px; margin-right: 15px; ">
         <div class="card-body text-secondary">
-            <p class="card-text"> Nesta seção você pode adicionar as regras do condomínio que serão exibidas para os usuários no portal, para começar clique no botão de adição no canto superior direito.</p>
+            <p class="card-text"> Publique as regras do condomínio aqui, elas ficaram disponíveis para os usuários do portal.</p>
         </div>
     </div>
-    @if($regras[0]==null)
-        <div class="card alert-secondary" style="margin-bottom:20px;">
-            <div class="card-header"> <i class="fa fa-exclamation-circle"></i> Aviso</div>
-            <div class="card-body">
-                <p class="card-text"> Nenhum conteudo foi adicionado ainda! Para ver mais informações nesta página, adicione um novo tópico no menu secundário clicando no botão de adição no canto superior direito.</p>
+    
+    <form id="searchForm" action="{{route('buscar_regra')}}" method="GET">
+            <div class="input-group col-md-8 mx-auto" style="margin-top:10px; margin-bottom:10px;  margin-left:-15px;">
+                  <input class="form-control py-2" type="search" placeholder="Pesquisar..." name="buscar" style="height:50px;">
+                  <span class="input-group-append">
+                    <button class="btn btn-outline-secondary" form="searchForm"type="submit" >
+                        <i class="fa fa-search"></i>
+                    </button>
+                  </span>
             </div>
+          </form>
+
+          
+        @if(!empty($src))
+        <div class="input-group col-md-8 mx-auto text-muted" style="margin-top:10px; margin-bottom:10px;">
+        <h2>Resultado da busca: {{$regras->total()}} encontrado(s).</h2>
         </div>
     @endif
-            
 
-          <div id="accordion" >
+    @if($regras[0]==null)
+    <div class="alert alert-secondary col-md-8 mx-auto text-muted" role="alert">
+            <h4 class="alert-heading"><i class="fa fa-exclamation-circle"></i>  Aviso</h4>
+            <hr>
+            <p>Nenhum conteúdo foi encontrado!</p>
+        </div>
+    @endif
+
+
+
+          <div id="accordion" class="col-md-8 mx-auto">
             @foreach($regras as $re)
-                <div class="card" style="margin-bottom:20px;">
+                <div class="card" style="margin-bottom:10px;">
                     <div class="card-header" id="a{{$re->id}}">
-                        <h3 class="mb-0">
+                        <h5>
                             <i class="fa fa-shield-alt"></i>
                             <b>{{$re->title}}</b>
+                            @if(Carbon\Carbon::parse($re->created_at)->startOfDay()==Carbon\Carbon::now()->startOfDay())
+                            <span class="badge badge-danger">NOVO</span>
+                            @endif
                             <button class="btn btn-link collapsed" style="font-size:20px;color: #e24646; float:right"data-toggle="collapse" data-target="#c{{$re->id}}" aria-expanded="false" aria-controls="{{$re->id}}"><i class="fa fa-angle-down"></i></button>  
-                        </h3>
+                        </h5>
+                        <small class="text-muted"> ( há {{Carbon\Carbon::parse($re->created_at)->diffForHumans(date(now())) }} ) </small>
                     </div>
                     <div id="c{{$re->id}}" class="collapse" aria-labelledby="ac{{$re->id}}" data-parent="#accordion">
                         <div class="card-body">
-                            <p class="card-text">{{$re->desc}}</p>
+                            <p class="text-right"> <button type="button" class="btn btn-primary btn-sm"><i class="fab fa-facebook-f"></i></button>  <button type="button" class="btn btn-success btn-sm"><i class="fab fa-whatsapp"></i></button>  <button type="button" class="btn btn-info btn-sm"><i class="fab fa-twitter"></i></button></p>
+                            <p class="card-text">{!!$re->desc!!}</p>
                             <footer class="blockquote-footer"> assinado por {{$re->author}},  pauta autorizada em {{date('d-m-Y', strtotime($re->reportdate))}}</footer>
                         </div>
                     </div>
                     <div id="c{{$re->id}}" class="collapse" aria-labelledby="ac{{$re->id}}" data-parent="#accordion">
                         <div class="modal-footer">
-                            <a id="editar" href="" class="btn btn-light" onclick="edit('{{$re->id}}','{{$re->title}}', '{{$re->desc}}','{{$re->reportdate}}','{{$re->author}}')"  data-toggle="modal" data-target="#editModal"><i class="fa fa-pen"></i></a>
-                            <button type="button" class="btn btn-danger"onclick="confirm('{{$re->id}}')" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash"></i></button>
+                            <a id="editar" href="" class="btn btn-light btn-sm" onclick="edit('{{$re->id}}','{{$re->title}}', '{{$re->reportdate}}','{{$re->author}}','{{route('regras_edit', ['id' => $re->id])}}')"  data-toggle="modal" data-target="#editModal"><i class="fa fa-pen"></i></a>
+                            <button type="button" class="btn btn-danger btn-sm"onclick="confirm('{{route('regras_del', ['id' => $re->id])}}')" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash"></i></button>
                         </div>
                     </div>
                 </div>
             @endforeach
-            {{$regras->links()}} 
+            {{$regras->links()}}
+
         </div>
 
+        
 
 
 <!--MODAL CRIAR-->
@@ -94,10 +120,11 @@
                         <div class="form-group">
                             <label for="tit" >Título</label>
                             <input type="text" class="form-control"  placeholder="nome da regra" name="tit" id="tit" required>
+                            
                         </div>
                         <div class="form-group">
                             <label for="desc" >Descrição</label>
-                            <textarea rows="4" class="form-control" placeholder="detalhes e condições" name="desc" id="desc" required></textarea>
+                            <textarea rows="4" class="form-control description" placeholder="detalhes e condições" name="desc" id="desc" ></textarea>
                         </div>
                         <div class="form-group">
                             <label for="dat" >Data do encaminhamento</label>
@@ -133,7 +160,7 @@
                     </div>
                     <div class="form-group">
                         <label for="descEdit" >Descrição</label>
-                        <textarea row="4" class="form-control" placeholder="detalhes e condições" name="descEdit" id="descEdit" required></textarea>
+                        <textarea row="4" class="form-control description" placeholder="detalhes e condições" name="descEdit" id="descEdit" ></textarea>
                     </div>
                     <div class="form-group">
                         <label for="datEdit" >Data</label>
@@ -173,7 +200,25 @@
     
 @endsection
 @section('js-content')
+<script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
+
 <script type="text/javascript">
+    tinymce.init({
+    selector:'textarea.description',
+    theme: 'modern',
+    plugins: ['advlist autolink lists link image charmap preview hr anchor pagebreak',
+    'searchreplace wordcount visualblocks visualchars code fullscreen',
+    'insertdatetime media nonbreaking save table contextmenu directionality',
+    'emoticons template paste textcolor colorpicker textpattern imagetools'
+    ],
+   toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media | forecolor backcolor emoticons',
+   image_advtab: true,
+   templates: [
+   { title: 'Test template 1', content: 'Test 1' },
+   { title: 'Test template 2', content: 'Test 2' }
+   ]
+});
+
 
     $('.toast').toast('show');
     $("#toast").fadeToggle(4000, "swing",function(){ //remover toast
@@ -186,20 +231,32 @@
 
     function clear_input(){
     document.getElementById("tit").value = "";
-    document.getElementById("desc").value = "";
     document.getElementById("dat").value = "";
     document.getElementById("aut").value = "";
+    tinyMCE.get('desc').setContent("");
     }
 
-    function edit(id,tit,desc,dat,aut){
-        document.getElementById("formEdit").action = "regras/edit/"+ id;
+    function edit(id,tit,dat,aut,str){
+        document.getElementById("formEdit").action = str;
         document.getElementById("titEdit").value = tit;
-        document.getElementById("descEdit").value = desc;
         document.getElementById("datEdit").value = dat;
         document.getElementById("autEdit").value = aut;
+
+        var desc = {!! json_encode($regras)!!};
+        
+    
+        for(i=0;i<desc.data.length;i++){
+            if(desc.data[i].id == id){
+                tinyMCE.get('descEdit').setContent(desc.data[i].desc);
+            }
+                //tinyMCE.get('descEdit').setContent(desc[i].desc);
+            
+        }
     }
-    function confirm(id){
-        document.getElementById("excluir").href = "regras/del/"+ id;
+
+
+    function confirm(str){
+        document.getElementById("excluir").href = str;
 
     }
 

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Anuncio;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
-
+use Auth;
 
 class AnunciosC extends Controller
 {
@@ -28,6 +28,37 @@ class AnunciosC extends Controller
         $anuncio->ps= $request->input('obs');
         $anuncio->save();
         return  redirect('/anuncios')->with('msg', 'Novo anuncio adicionado!');
+    }
+
+    public function teste(){
+        
+    }
+    public function search(Request $request){
+        
+        if($request->input('buscar') == null){
+            return redirect('/anuncios');
+        }
+        $word=$request->input('buscar');
+        $anuncios = new Anuncio();
+        $anuncios= DB::table('anuncios')->where('title','like','%'.$word.'%')->orderBy('created_at', 'desc')->paginate(4);
+        $pagination = $anuncios->appends ( array (
+            'buscar' => $request->input('buscar')
+          ) );      
+
+        try{
+            $auth= Auth::user()->isAdmin;
+            if($auth==true){ //retornar view para admin
+                return view('adm.anuncios',compact('anuncios'))->with('src','busca');
+                 
+            }else{ //retornar view para usuario
+
+                return view('anuncios',compact('anuncios'))->with('src','busca');
+
+            }
+        }catch(\Exception $e){ //burlar acesso redireciona para página de login
+
+            return redirect('/login');
+        }
     }
 
     public function update(Request $request, $id)

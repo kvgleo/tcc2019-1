@@ -19,6 +19,7 @@
       </div>
 
       <div class="container">
+          
         <!-- Example row of columns -->
         <div class="row " style="justify-content: center;">
           <div class=" card col-md-3" style="margin-right:20px; margin-bottom: 50px;">
@@ -49,7 +50,7 @@
 
       </div> 
 
-      <!--MODAL CRIAR-->
+      <!--MODAL ANUNCIOS-->
 <div class="modal fade" id="anunciosModal" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content" style="overflow:hidden;">
@@ -61,9 +62,13 @@
                         <div class="card" style="margin-bottom:20px;">
                                 <div class="card-body ">
                                         <button type="button" id="pop" class="btn btn-sm btn-link" style="float:right;" data-trigger="hover" data-boundary="window" data-toggle="popover" title="Observações" data-content="{{$a->ps}}"><i class="fa fa-exclamation-circle"></i></button>
-                                    <h5 class="card-title"> <i class="fa fa-paperclip" style="margin-right:5px;"></i>{{$a->title}}  </h5>
-                                    <small class="card-text text-muted">  postado em {{date('d/m/Y', strtotime($a->reportdate))}}</small>
-                                    <p class="card-text text-secondary"> {{$a->description}}</p>
+                                    <h5 class="card-title"> <i class="fa fa-paperclip" style="margin-right:5px;"></i>{{$a->title}}  
+                                        @if(Carbon\Carbon::parse($a->created_at)->startOfDay()==Carbon\Carbon::now()->startOfDay())
+                                        <span class="badge badge-primary">NOVO</span>
+                                        @endif
+                                    </h5>
+                                    <small class="card-text text-muted">  postado em {{date('d/m/Y', strtotime($a->reportdate))}}  ( há {{Carbon\Carbon::parse($a->created_at)->diffForHumans(date(now())) }} )</small>
+                                    <p class="card-text text-secondary"> {!!$a->description!!}</p>
                                 </div>
                             </div>
                     

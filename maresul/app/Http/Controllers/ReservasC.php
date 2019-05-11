@@ -18,7 +18,7 @@ class ReservasC extends Controller{
             if($auth==true){ //retornar view para admin
                 $reservas = DB::table('reservas') //consulta principal
                 ->join('users', 'users.id', '=', 'reservas.id_user',)
-                ->select('reservas.*', 'users.*','reservas.id','reservas.created_at')->orderBy('reservas.created_at', 'desc')->paginate(10);
+                ->select('reservas.*', 'users.*','reservas.id','reservas.created_at')->orderBy('reservas.created_at', 'desc')->get();
         
                 $conc = DB::table('reservas') //consultas para gráficos
                 ->select(DB::raw('count(*) AS num'))->where('reservas.reportdate', '<', now())->get();

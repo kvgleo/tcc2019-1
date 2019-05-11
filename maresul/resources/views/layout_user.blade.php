@@ -32,6 +32,7 @@
                   <ul class="navbar-nav navbar-right">
                       <li class="nav-item dropdown">
                           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="{{Storage::url('banner/userpic.jpg') }}" style="width:25px; height:25px; ">
                               <i class="fa fa-profile"></i> Olá {{ Auth::user()->name }}
                           </a>
                           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">

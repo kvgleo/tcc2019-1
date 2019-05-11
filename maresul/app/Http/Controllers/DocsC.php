@@ -11,22 +11,25 @@ class DocsC extends Controller{ //controller de documentos apenas inclui funçõ
 
     public function index(){
 
-        $docs = DB::table('docs')->orderBy('created_at', 'desc')->paginate(10); //pega todos os documentos cadastrados e envia para a view
+        $docs = DB::table('docs')->orderBy('created_at', 'desc')->get(); //pega todos os documentos cadastrados e envia para a view
         return view('adm.documentos', ['docs' => $docs]);
   
     }
 
     public function store(Request $request){ //criar novo document
+
         try{
             $path = $request->file('file')->store('public'); //cria um novo arquivo na pasta storage e recupera o path
                 if (empty($path)) {
                     return redirec('/documentos')->with('avs', 'Documento inválido.');
                 }
+
             $doc = new Doc(); //instancia novo objeto de tipo Docs e armezena novos dados para ele.
             $doc->doc_title= $request->input('doc_title');
             $doc->doc_desc= $request->input('doc_desc');
             $doc->doc_path= $path;
             $doc->save();
+            
             return  redirect('/documentos')->with('msg', 'Documento adicionado!');
         }catch(\Exception $e){
             return  redirect('/documentos')->with('avs','Documento inválido');

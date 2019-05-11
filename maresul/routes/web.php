@@ -41,11 +41,12 @@ Route::post('/lembretes/edit/{id}', 'LembretesC@update')->middleware('auth:admin
 
 //rotas para anuncios:
 
-Route::get('/anuncios', 'AnunciosC@index')->middleware('auth:admin')->name('admin_anuncios'); //pagina de anuncios
-Route::post('/anuncios', 'AnunciosC@store')->middleware('auth:admin')->name('admin_anuncios_submit'); //armazenar novo anuncio
-Route::get('/anuncios/del/{id}', 'AnunciosC@destroy')->middleware('auth:admin')->name('admin_anuncios_del'); //deletar anuncio
-Route::post('/anuncios/edit/{id}', 'AnunciosC@update')->middleware('auth:admin')->name('admin_anuncios_edit'); //atualizar anuncio
-
+Route::get('/anuncios', 'AnunciosC@index')->middleware('auth:admin')->name('anuncios'); //pagina de anuncios
+Route::post('/anuncios', 'AnunciosC@store')->middleware('auth:admin')->name('anuncios_submit'); //armazenar novo anuncio
+Route::get('/anuncios/del/{id}', 'AnunciosC@destroy')->middleware('auth:admin')->name('anuncios_del'); //deletar anuncio
+Route::post('/anuncios/edit/{id}', 'AnunciosC@update')->middleware('auth:admin')->name('anuncios_edit'); //atualizar anuncio
+Route::get('/anuncios/buscar', 'AnunciosC@search')->middleware('auth:admin,web')->name('buscar_anuncio'); //pesquisar ajuda
+Route::get('/teste', 'AnunciosC@teste')->middleware('auth:admin')->name('teste'); //pesquisar ajuda
 //rotas para documentos:
 
 Route::get('/documentos', 'DocsC@index')->middleware('auth:admin')->name('admin_docs'); //pagina de documentos
@@ -64,6 +65,7 @@ Route::get('/regras', 'RegrasC@index')->middleware('auth:web,admin')->name('regr
 Route::post('/regras', 'RegrasC@store')->middleware('auth:admin')->name('regras_criar'); //armazenar nova regra
 Route::get('/regras/del/{id}', 'RegrasC@destroy')->middleware('auth:admin')->name('regras_del'); //deletar regra
 Route::post('/regras/edit/{id}', 'RegrasC@update')->middleware('auth:admin')->name('regras_edit'); //atualizar regra
+Route::get('/regras/buscar', 'RegrasC@search')->middleware('auth:admin,web')->name('buscar_regra'); //pesquisar regra
 
 //rotas para ajuda:
 
@@ -71,3 +73,17 @@ Route::get('/ajuda', 'PerguntasC@index')->middleware('auth:web,admin')->name('aj
 Route::post('/ajuda', 'PerguntasC@store')->middleware('auth:admin')->name('pergunta_criar'); //armazenar nova pergunta
 Route::get('/ajuda/del/{id}', 'PerguntasC@destroy')->middleware('auth:admin')->name('pergunta_del'); //deletar pergunta
 Route::post('/ajuda/edit/{id}', 'PerguntasC@update')->middleware('auth:admin')->name('pergunta_edit'); //atualizar pergunta
+Route::get('/ajuda/buscar', 'PerguntasC@search')->middleware('auth:admin,web')->name('buscar_ajuda'); //pesquisar ajuda
+
+//rotas para despesas:
+
+Route::get('/despesas', 'DespesasC@index')->middleware('auth:admin')->name('despesas'); //pagina de perguntas (modificado para os tipos de usuarios)
+Route::post('/despesas', 'DespesasC@store')->middleware('auth:admin')->name('despesa_criar'); //armazenar nova pergunta
+Route::get('/historico', 'DespesasC@historico_red')->middleware('auth:admin')->name('historico_redirect'); //redireciona historico
+Route::get('/historico/{ano}', 'DespesasC@historico')->middleware('auth:admin')->name('historico'); //deletar pergunta
+Route::post('/historico/edit/{id}/{ano}', 'DespesasC@update')->middleware('auth:admin')->name('despesa_del'); //deletar registro
+Route::get('/historico/del/{id}/{ano}', 'DespesasC@destroy')->middleware('auth:admin')->name('despesa_del'); //deletar registro
+
+//rotas para estatisticas:
+
+Route::get('/estatisticas', 'DespesasC@est')->middleware('auth:admin')->name('estatisticas');

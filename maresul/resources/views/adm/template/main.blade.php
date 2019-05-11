@@ -8,6 +8,7 @@
 </head>
 
 <style>
+    .mce-notification-warning {display: none;}
     a{
         color: #bbc1c9;
     }
@@ -25,6 +26,11 @@
     .pagination a:hover{
     color: #7c1010;
     }
+
+    .testtt:hover {
+    color: none;
+    background-color: none;
+}
 
 </style>
 
@@ -54,9 +60,10 @@
                 <ul class="navbar-nav navbar-right">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img id="img"src="{{Storage::url('banner/userpic.jpg') }}" style="width:25px; height:25px; ">
                             <i class="fa fa-profile"></i> Olá, {{ Auth::user()->email }}
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     @csrf
                                 </form>
@@ -79,13 +86,13 @@
                 </li>
                 <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted"><span> Financeiro</span><i class="fa fa-dollar-sign"></i></h6>
                 <li class="nav-item">
-                <a id="despesas"class="nav-link" href="#" data-toggle="tooltip" data-placement="right" title="resumo e relatórios mensais"><i class="fa fa-coins"></i> Despesas</a>
+                <a id="despesas"class="nav-link" href="/despesas" data-toggle="tooltip" data-placement="right" title="resumo e relatórios mensais"><i class="fa fa-coins"></i> Despesas</a>
                 </li>
                 <li class="nav-item">
-                <a id="estatistica"class="nav-link" href="#" data-toggle="tooltip" data-placement="right" title="gráficos financeiros"><i class="fa fa-chart-bar"></i> Estatísticas</a>
+                <a id="estatistica"class="nav-link" href="/estatisticas" data-toggle="tooltip" data-placement="right" title="gráficos financeiros"><i class="fa fa-chart-bar"></i> Estatísticas</a>
                 </li>
                 <li class="nav-item">
-                <a id="historico" class="nav-link" href="#" data-toggle="tooltip" data-placement="right" title="históricos monetáros anuais"><i class="fa fa-layer-group"></i> Histórico</a>
+                <a id="historico" class="nav-link" href="/historico" data-toggle="tooltip" data-placement="right" title="históricos monetáros anuais"><i class="fa fa-layer-group"></i> Histórico</a>
                 </li>
                 <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted"><span> Administrativo</span><i class="fa fa-toolbox"></i></h6>
                 <li class="nav-item">
@@ -125,14 +132,15 @@
 @yield('js-content')
 
 <script type="text/javascript">
-$(function () {
-    $('[data-toggle="tooltip"]').tooltip()
-  })</script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+  </script>
 
-  <!-- Bootstrap core JavaScript
-  ================================================== -->
-  <!-- Placed at the end of the document so the pages load faster -->
 
+<script>
+    @yield('js-content2');
+</script>
 
 </body>
 </html>

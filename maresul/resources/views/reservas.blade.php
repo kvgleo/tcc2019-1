@@ -34,7 +34,7 @@
     <nav aria-label="breadcrumb" style="margin-top:-25px;">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/home">Menu principal</a></li>
-            <li class="breadcrumb-item active" >Reservas </li>
+            <li class="breadcrumb-item active" ><a class="text-muted"href="/reservas"> Reservas</a> </li>
         </ol>
         <div class="card" style="margin-bottom:20px;">
             <div class="card-body text-secondary">
@@ -220,6 +220,7 @@
                             <!-- -->
 
                             <div  id="l4" class="infos" style="display:none;">
+                                
                                     <h1 id="salao2">SALÃO II
                                         <form id="form4" class="form-inline" action="/reservas" method="post" style="float:right;">
                                             @csrf

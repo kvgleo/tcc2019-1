@@ -14,7 +14,7 @@ class LembretesC extends Controller{
 
     public function index(){
         
-        $lembretes = DB::table('lembretes')->orderBy('created_at', 'desc')->paginate(10); //listar anuncios por ordem de criação e paginados
+        $lembretes = DB::table('lembretes')->orderBy('created_at', 'desc')->get(); //listar anuncios por ordem de criação e paginados
         return view('adm.lembretes', ['lembretes' => $lembretes]);
   
     }
