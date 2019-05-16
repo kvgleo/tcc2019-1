@@ -82,7 +82,11 @@
                     </div>
                     <div id="c{{$a->id}}" class="collapse" aria-labelledby="ac{{$a->id}}" data-parent="#accordion">
                         <div class="card-body">
-                            <p class="text-right"> <button type="button" class="btn btn-danger btn-sm"> Notificar <i class="fa fa-envelope"></i></button></p>
+                            @if($a->email == true)
+                            <p class="text-right"> <a href="/email/{{$a->id}}"class="btn btn-success btn-sm disabled"> Notificado <i class="fa fa-envelope"></i></a></p>
+                            @else
+                        <p class="text-right"> <a id="msg" href="/email/{{$a->id}}" class="btn btn-danger btn-sm" value="notificar">  Notificar <i id="icon" class="fa fa-envelope"  role="status"></i></a></p>
+                        @endif
                             <p class="desc">{!!$a->description!!}</p> <!-- AQUIIII --------------------------------------------- -->
                             <small class="text-muted">comentários: </small>
                             <div class="card" style="margin-bottom:20px;">
@@ -211,6 +215,10 @@
    { title: 'Test template 1', content: 'Test 1' },
    { title: 'Test template 2', content: 'Test 2' }
    ]
+});
+
+    $('#msg').click(function(){
+    document.getElementById("msg").innerHTML = ' Enviando <i id="icon" class="spinner-border spinner-border-sm"  role="status"></i>'
 });
 
         $('.toast').toast('show');

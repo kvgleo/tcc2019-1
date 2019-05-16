@@ -89,7 +89,7 @@
                 <a id="despesas"class="nav-link" href="/despesas" data-toggle="tooltip" data-placement="right" title="resumo e relatórios mensais"><i class="fa fa-coins"></i> Despesas</a>
                 </li>
                 <li class="nav-item">
-                <a id="estatistica"class="nav-link" href="/estatisticas" data-toggle="tooltip" data-placement="right" title="gráficos financeiros"><i class="fa fa-chart-bar"></i> Estatísticas</a>
+                <a id="estatisticas"class="nav-link" href="/estatisticas" data-toggle="tooltip" data-placement="right" title="gráficos financeiros"><i class="fa fa-chart-bar"></i> Estatísticas</a>
                 </li>
                 <li class="nav-item">
                 <a id="historico" class="nav-link" href="/historico" data-toggle="tooltip" data-placement="right" title="históricos monetáros anuais"><i class="fa fa-layer-group"></i> Histórico</a>
@@ -107,7 +107,7 @@
                 <a id="documentos"class="nav-link" href="/documentos" data-toggle="tooltip" data-placement="right" title="arquivos importantes"><i class="fa fa-file-alt"></i> Documentos</a></li>
                 <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted"><span>Social</span><i class="fa fa-comments"></i>              </h6>
                 <li class="nav-item">
-                    <a id="comunidade"class="nav-link" href="#" data-toggle="tooltip" data-placement="right" title="ver cadastros gerais"><i class="fa fa-users"></i> Comunidade</a>
+                    <a id="comunidade"class="nav-link" href="/comunidade" data-toggle="tooltip" data-placement="right" title="ver cadastros gerais"><i class="fa fa-users"></i> Comunidade</a>
                 </li>
                 <li class="nav-item">
                 <a id="forum" class="nav-link" href="#" data-toggle="tooltip" data-placement="right" title="interações da comunidade"><i class="fa fa-quote-left"></i> Fórum Virtual</a>

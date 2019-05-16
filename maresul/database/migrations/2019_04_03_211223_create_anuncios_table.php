@@ -19,6 +19,7 @@ class CreateAnunciosTable extends Migration
             $table->string('title');
             $table->longText('description');
             $table->string('ps');
+            $table->boolean('email');
 
             $table->timestamps();
         });

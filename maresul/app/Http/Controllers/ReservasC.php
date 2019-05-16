@@ -15,6 +15,7 @@ class ReservasC extends Controller{
         
         try{
             $auth= Auth::user()->isAdmin;
+            
             if($auth==true){ //retornar view para admin
                 $reservas = DB::table('reservas') //consulta principal
                 ->join('users', 'users.id', '=', 'reservas.id_user',)

@@ -5,13 +5,15 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+    @yield('style-content')
 </head>
 
 
 <body>
 
         <nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color:#3a79e0;">
-                <a class="navbar-brand" href="#">MAR&SUL- Usuários </a>
+                <a class="navbar-brand" href="#">MAR AZUL- Usuários </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
                 </button>
@@ -30,9 +32,18 @@
                       </li>
                   </ul>
                   <ul class="navbar-nav navbar-right">
+                      @if(Auth::user()->inp == false)
+                        <li class="nav-item">
+                                <a class="nav-link"><small>  <button type="button" id="pop" class="btn btn-sm btn-link text-success"  data-trigger="hover" data-placement="bottom" data-boundary="window" data-toggle="popover"  data-content="Status: Adimplente"><i class="fa fa-check-circle"></i></button>  </small>  </a>
+                              </li>
+                        @else
+                        <li class="nav-item">
+                                <a class="nav-link"><small>  <button type="button" id="pop" class="btn btn-sm btn-link" style="border:gold; color:#e24646;" data-trigger="hover" data-placement="bottom" data-boundary="window" data-toggle="popover"  data-content="Status: Inadimplente "><i class="fa fa-exclamation-circle"></i></button> </small>  </a>
+                              </li>
+                        @endif
                       <li class="nav-item dropdown">
                           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img src="{{Storage::url('banner/userpic.jpg') }}" style="width:25px; height:25px; ">
+                            <img src="{{Storage::url('user_img/userpic.png') }}" style="width:25px; height:25px; ">
                               <i class="fa fa-profile"></i> Olá {{ Auth::user()->name }}
                           </a>
                           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -97,7 +108,15 @@
 <script type="text/javascript">
 $(function () {
     $('[data-toggle="tooltip"]').tooltip()
-    })</script>
+    });
+    
+    $(function () {
+    $('[data-toggle="popover"]').popover()
+  })
+    
+    </script>
+
+    
 
     <!-- Bootstrap core JavaScript
     ================================================== -->

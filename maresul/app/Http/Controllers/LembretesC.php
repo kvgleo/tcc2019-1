@@ -30,6 +30,10 @@ class LembretesC extends Controller{
         return  redirect('/lembretes')->with('msg', 'Um novo lembrete foi adicionado!');
     }
 
+    public function teste(){
+        return view('adm.teste');
+    }
+
     public function update(Request $request, $id){
         $lembrete = Lembrete::find($id);
         if(isset($lembrete)){

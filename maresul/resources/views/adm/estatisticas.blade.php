@@ -112,7 +112,7 @@
                             <small class="card-text"> Inadimplência</small>
                         </div>
                         <div class=" col-md-6 card-text text-right text-muted">
-                                <small class="card-text">  /{{($in[0]->inp *100)/$users[0]->total}}% já quitados</small>
+                                <small class="card-text">  /{{number_format(($in[0]->inp *100)/$users[0]->total,0)}}% já quitados</small>
                             </div>
                     <div class=" col-md-12 card-text">
 
@@ -208,8 +208,8 @@
                                         <p class="text-muted"> N/D </p>
                                     @else
                                         <span class="badge badge-success">{{$mconc[0]->tipo}}</span>
-                                        <small class="text-muted" style="display:inline" > {{$mconc[0]->lanc_desc}} ({{ $mconc[0]->reportdate}})</small> 
-                                        <p class="text-success text-right" style="display:inline"> {{$mconc[0]->valor}}</p>
+                                        <small class="text-muted" style="display:inline" > {{$mconc[0]->lanc_desc}} ({{date('d/m/Y', strtotime( $mconc[0]->reportdate))  }})</small> 
+                                        <p class="text-success text-right" style="display:inline"> R$: {{number_format($mconc[0]->valor,2,",",".")}}</p>
                                         <button type="button" class="btn btn-link btn-sm" data-trigger="hover" data-boundary="window" data-toggle="popover" data-placement="right" data-content="{{$mconc[0]->info_tipo}}">
                                             <i style="color:grey" class="fa fa-info-circle"></i> 
                                         </button> 
@@ -222,8 +222,8 @@
                                         <p class="text-muted"> N/D </p>
                                     @else
                                         <span class="badge badge-success">{{$madm[0]->tipo}}</span>
-                                        <small class="text-muted" style="display:inline" > {{$madm[0]->lanc_desc}} ({{ $madm[0]->reportdate}})</small> 
-                                        <p class="text-success text-right" style="display:inline"> {{$madm[0]->valor}}</p>
+                                        <small class="text-muted" style="display:inline" > {{$madm[0]->lanc_desc}} ({{date('d/m/Y', strtotime( $madm[0]->reportdate))  }})</small> 
+                                        <p class="text-success text-right" style="display:inline"> R$: {{number_format($madm[0]->valor,2,",",".")}} </p>
                                         <button type="button" class="btn btn-link btn-sm" data-trigger="hover" data-boundary="window" data-toggle="popover" data-placement="right" data-content="{{$madm[0]->info_tipo}}">
                                             <i style="color:grey" class="fa fa-info-circle"></i> 
                                         </button> 
@@ -236,8 +236,8 @@
                                         <p class="text-muted"> N/D </p>
                                     @else
                                         <span class="badge badge-success">{{$mccmi[0]->tipo}}</span>
-                                        <small class="text-muted" style="display:inline" > {{$mccmi[0]->lanc_desc}} ({{ $mccmi[0]->reportdate}})</small> 
-                                        <p class="text-success text-right" style="display:inline"> {{$mccmi[0]->valor}}</p>
+                                        <small class="text-muted" style="display:inline" > {{$mccmi[0]->lanc_desc}} ({{date('d/m/Y', strtotime( $mccmi[0]->reportdate))  }})</small> 
+                                        <p class="text-success text-right" style="display:inline">R$: {{number_format($mccmi[0]->valor,2,",",".")}} </p>
                                         <button type="button" class="btn btn-link btn-sm" data-trigger="hover" data-boundary="window" data-toggle="popover" data-placement="right" data-content="{{$mccmi[0]->info_tipo}}">
                                             <i style="color:grey" class="fa fa-info-circle"></i> 
                                         </button> 
@@ -250,8 +250,8 @@
                                         <p class="text-muted"> N/D </p>
                                     @else
                                         <span class="badge badge-success">{{$mpes[0]->tipo}}</span>
-                                        <small class="text-muted" style="display:inline" > {{$mpes[0]->lanc_desc}} ({{ $mpes[0]->reportdate}})</small> 
-                                        <p class="text-success text-right" style="display:inline"> {{$mpes[0]->valor}}</p>
+                                        <small class="text-muted" style="display:inline" > {{$mpes[0]->lanc_desc}} ({{date('d/m/Y', strtotime( $mpes[0]->reportdate))  }})</small> 
+                                        <p class="text-success text-right" style="display:inline"> R$: {{number_format($mpes[0]->valor,2,",",".")}}</p>
                                         <button type="button" class="btn btn-link btn-sm" data-trigger="hover" data-boundary="window" data-toggle="popover" data-placement="right" data-content="{{$mpes[0]->info_tipo}}">
                                             <i style="color:grey" class="fa fa-info-circle"></i> 
                                         </button> 
@@ -287,6 +287,9 @@
 
 
 <script>
+      $(function() {
+    $('#estatisticas').addClass('btn-danger');
+  });
 
 $(function () {
     $('[data-toggle="popover"]').popover()

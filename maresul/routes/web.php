@@ -38,6 +38,7 @@ Route::get('/lembretes/del/{id}', 'LembretesC@destroy')->middleware('auth:admin'
 Route::post('/lembretes/edit/{id}', 'LembretesC@update')->middleware('auth:admin')->name('admin_lembretes_edit'); //atualizar lembrete
 //ajuda
 
+Route::get('/teste', 'LembretesC@teste')->middleware('auth:admin')->name('teste'); //deletar lembrete
 
 //rotas para anuncios:
 
@@ -46,7 +47,7 @@ Route::post('/anuncios', 'AnunciosC@store')->middleware('auth:admin')->name('anu
 Route::get('/anuncios/del/{id}', 'AnunciosC@destroy')->middleware('auth:admin')->name('anuncios_del'); //deletar anuncio
 Route::post('/anuncios/edit/{id}', 'AnunciosC@update')->middleware('auth:admin')->name('anuncios_edit'); //atualizar anuncio
 Route::get('/anuncios/buscar', 'AnunciosC@search')->middleware('auth:admin,web')->name('buscar_anuncio'); //pesquisar ajuda
-Route::get('/teste', 'AnunciosC@teste')->middleware('auth:admin')->name('teste'); //pesquisar ajuda
+Route::get('/email/{id}','AnunciosC@email')->middleware('auth:admin')->name('enviar_email');
 //rotas para documentos:
 
 Route::get('/documentos', 'DocsC@index')->middleware('auth:admin')->name('admin_docs'); //pagina de documentos
@@ -87,3 +88,12 @@ Route::get('/historico/del/{id}/{ano}', 'DespesasC@destroy')->middleware('auth:a
 //rotas para estatisticas:
 
 Route::get('/estatisticas', 'DespesasC@est')->middleware('auth:admin')->name('estatisticas');
+
+//rotas para comunidade:
+
+Route::get('/comunidade', 'UsersC@index')->middleware('auth:admin,web')->name('comunidade');
+Route::post('/comunidade/{id}', 'UsersC@store')->middleware('auth:admin')->name('cadastro_users');
+Route::get('/status/{tipo}/{id}', 'UsersC@inp')->middleware('auth:admin')->name('inp_users');
+Route::post('/comunidade/edit/{id}', 'UsersC@update')->middleware('auth:admin,web')->name('edit_users');
+Route::get('/comunidade/del/{id}', 'UsersC@destroy')->middleware('auth:admin')->name('del_users');
+

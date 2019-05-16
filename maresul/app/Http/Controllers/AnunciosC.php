@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Anuncio;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Auth;
+use Mail;
 
 class AnunciosC extends Controller
 {
@@ -26,11 +28,34 @@ class AnunciosC extends Controller
         $anuncio->description= $request->input('desc');
         $anuncio->reportdate= Carbon::now();
         $anuncio->ps= $request->input('obs');
+        $anuncio->email= false;
         $anuncio->save();
         return  redirect('/anuncios')->with('msg', 'Novo anuncio adicionado!');
     }
 
-    public function teste(){
+    public function email($id){
+
+        $anuncio= Anuncio::find($id);
+        $user1 = DB::table('users')->orderBy('created_at', 'desc')->get()->toArray();
+
+        foreach($user1 as $u){
+
+            $data = array(
+                'email'=> $u->email,
+                'title'=>$anuncio->title
+                );
+
+        Mail::send('adm.anunciosEmail', ['desc' => $anuncio->description, 'obs'=> $anuncio->ps ],  function($m) use ($data){
+        $m->from('leonardo.silveira@ulbra.inf.br');
+        $m->subject( "Novo Comunicado! - ". $data['title']);
+        $m->to($data['email']);
+        });
+        }
+
+        $anuncio->email = true;
+        $anuncio->save();
+
+        return redirect('/anuncios')->with('msg', 'Email Enviado!');
         
     }
     public function search(Request $request){

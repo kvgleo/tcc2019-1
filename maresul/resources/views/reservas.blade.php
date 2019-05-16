@@ -5,20 +5,21 @@
 <title>MARESUL- Regras de Convivência</title>
 
 @endsection
+
 @section('warn-content')
 
 @if(Session::has('msg'))
 <div class="position-absolute w-100 d-flex flex-column p-4 " id="toast">
-        <div class="toast ml-auto alert-success" role="alert" data-autohide="false"  style="margin-top:2rem;">
-            <div class="toast-body alert-success"><i class="fa fa-check-circle mr-2"></i>{{ Session::get('msg') }}<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+        <div class="toast ml-auto alert-success" role="alert" data-autohide="false"  style="margin-top:7rem;">
+            <div class="toast-body alert-success"><i class="fa fa-check-circle mr-2"></i>{{ Session::get('msg') }}<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close"><span id="close" aria-hidden="true">×</span></button></div>
         </div>
     </div>
 @endif
 
 @if(Session::has('avs'))
 <div class="position-absolute w-100 d-flex flex-column p-4 " id="toast">
-        <div class="toast ml-auto alert-danger" role="alert" data-autohide="false"  style="margin-top:2rem;">
-            <div class="toast-body alert-danger"><i class="fa fa-times-circle mr-2"></i> {{ Session::get('avs') }}<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+        <div class="toast ml-auto alert-danger" role="alert" data-autohide="false"  style="margin-top:7rem;">
+            <div class="toast-body alert-danger"><i class="fa fa-times-circle mr-2"></i> {{ Session::get('avs') }}<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close"><span id="close" aria-hidden="true">×</span></button></div>
         </div>
 </div>
 @endif
@@ -86,7 +87,7 @@
                 
 
                 <!--infos-->
-                    <div id="l1"class="infos">
+                    <div id="l1"class="infos text-secondary">
                         <h1>QUADRA
                             <form id="form1" class="form-inline" action="/reservas" method="post" style="float:right;">
                                 @csrf
@@ -97,7 +98,7 @@
                                 <button type="submit" form="form1" class="btn btn-success mb-2">Agendar</button>
                             </form> 
                         </h1>
-                        <table class="table table-hover">
+                        <table class="table table-hover  text-secondary">
                             <thead>
                                 <tr>
                                     <th scope="col">Local </th>
@@ -130,7 +131,7 @@
                     </div>
                     <!-- ------ -->
 
-                    <div  id="l2" class="infos" style="display:none;">
+                    <div  id="l2" class="infos text-secondary" style="display:none;">
                             <h1>PÁTIO
                             <form id="form2" class="form-inline" action="/reservas" method="post" style="float:right;">
                                 @csrf
@@ -140,7 +141,7 @@
                                 </div>
                                 <button type="submit" form="form2" class="btn btn-success mb-2">Agendar</button>
                             </form> </h1>
-                            <table class="table table-hover">
+                            <table class="table table-hover text-secondary">
                                 <thead>
                                     <tr>
                                         <th scope="col">Local </th>
@@ -173,7 +174,7 @@
                         </div>
                         <!-- -->
 
-                        <div  id="l3" class="infos" style="display:none;">
+                        <div  id="l3" class="infos text-secondary" style="display:none;">
                                 <h1 id="salao1"> SALÃO I
                                     <form id="form3" class="form-inline" action="/reservas" method="post" style="float:right;">
                                         @csrf
@@ -185,7 +186,7 @@
                                     </form>
 
                                  </h1>
-                                <table class="table table-hover">
+                                <table class="table table-hover text-secondary">
                                     <thead>
                                         <tr>
                                             <th scope="col">Local </th>
@@ -219,7 +220,7 @@
 
                             <!-- -->
 
-                            <div  id="l4" class="infos" style="display:none;">
+                            <div  id="l4" class="infos text-secondary" style="display:none;">
                                 
                                     <h1 id="salao2">SALÃO II
                                         <form id="form4" class="form-inline" action="/reservas" method="post" style="float:right;">
@@ -231,7 +232,7 @@
                                             <button type="submit" form="form4" class="btn btn-success mb-2">Agendar</button>
                                         </form>
                                     </h1>
-                                    <table class="table table-hover">
+                                    <table class="table table-hover text-secondary">
                                         <thead>
                                             <tr>
                                                 <th scope="col">Local </th>
@@ -300,8 +301,9 @@
 <script type="text/javascript">
 
     $('.toast').toast('show');//exibir toast
-    $("#toast").fadeToggle(4000, "swing",function(){ //remover toast
-        this.remove();
+
+    $('#close').click(function(){
+        $("#toast").remove();
     });
 
     function see(id) { //preencher card com informações ao clicar no botão
@@ -342,6 +344,8 @@
     document.getElementById("excluir").href = "reservas/del/"+id1+'/'+id2;
 
 }
+
+
 
 </script>
     

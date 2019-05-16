@@ -2,7 +2,7 @@
 
 
 @section('title-content')
-<title> MAR&SUL - Home</title>
+<title> MAR AZUL - Home</title>
     
 @endsection
 
@@ -13,7 +13,7 @@
 <div class="jumbotron mx-auto" style="margin-top:40px; background-image: url('{{Storage::url('banner/banner2.png') }}'); background-repeat: no-repeat;">
         <div class="container" >
           <h1 class="display-3">BEM-VINDO!</h1>
-          <p style="max-width:500px;">Caro usuário, você está na página principal do portal dos moradores do condomínio MAR&SUL, se você tiver qualquer dúvida entre em contato com os líderes da zeladoria e não deixe de ficar atualizado sobre as notícias recentes clicando no botão abaixo. Boas vindas!</p>
+          <p style="max-width:500px;">Caro usuário, você está na página principal do portal dos moradores do condomínio MAR AZUL, se você tiver qualquer dúvida entre em contato com os líderes da zeladoria e não deixe de ficar atualizado sobre as notícias recentes clicando no botão abaixo. Boas vindas!</p>
           <p><button type="button" class="btn btn-primary btn-lg"data-toggle="modal" data-target="#anunciosModal" role="button">Anuncios</button></p>
         </div>
       </div>
@@ -39,8 +39,8 @@
         <div class=" card col-md-3" style="margin-bottom: 50px; margin-right:20px;">
             <div class="card-body">
                     <h4 class="card-title">Comunidade <i class="fa fa-users" style="float:right;color:#3a79e0; "></i></h4>
-                <p>Veja os membros que estão participando da comunidade online.</p>
-                <p><a class="btn btn-primary" href="#" role="button">Acessar</a></p>
+                <p>Veja detalhes do seu perfil e os membros que estão participando da comunidade online.</p>
+                <p><a class="btn btn-primary" href="/comunidade" role="button">Acessar</a></p>
             </div>
         </div>
 
@@ -55,7 +55,7 @@
         <div class="modal-dialog">
             <div class="modal-content" style="overflow:hidden;">
                 <div class="modal-header">
-                <h4 class="modal-title">ANUNCIOS OFICIAIS</h4>
+                <h4 class="modal-title"><i class="fa fa-check"></i> ANUNCIOS OFICIAIS</h4>
                 </div>
                 <div class="modal-body" style="overflow-y:scroll;  height:380px;">
                         @foreach($anuncios as $a)
@@ -85,24 +85,3 @@
     
 @endsection
 
-@section('js-content')
-<script type="text/javascript">
-    $(function () {
-    $('#pop').popover();
-    $('div').on('scroll', function () {
-        var $container = $(this);
-        $(this).find('.popover').each(function () {
-            $(this).css({
-                top:  - $container.scrollTop()
-            });
-        });
-    });
-});
-
-    $(function () {
-    $('[data-toggle="popover"]').popover()
-  })
-</script>
-
-    
-@endsection

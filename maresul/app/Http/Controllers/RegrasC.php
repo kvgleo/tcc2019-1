@@ -82,19 +82,9 @@ class RegrasC extends Controller{
         return  redirect('/regras');
     }
 
-    public function destroy($id){ //remover anuncio e redirecionar para pagina principal.
+    public function destroy($id){ //remover regra e redirecionar para pagina principal.
         $regra= Regra::find($id);
         $regra->delete(); 
         return  redirect('/regras')->with('avs', 'Regra excluida!');
-        /*$regra= Regra::find($id);
-         if(isset($regra)){ 
-             try{
-             $regra->delete(); 
-             return  redirect('/regras')->with('avs', 'Regra excluida!');
-            }catch(\Exception $e){
-                return  redirect('/regras')->with('avs','Não foi possível remover o item desejado.');
-            }
-        } 
-        return  redirect('/regras');*/
     }
 }
