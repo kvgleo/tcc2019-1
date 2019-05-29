@@ -1,7 +1,7 @@
 @extends('adm.template.main')
 
 @section('title-content')
-<title>MARESUL- Histórico</title>
+<title>MAR AZUL- Histórico</title>
 
 @endsection
 @section('warn-content')
@@ -149,7 +149,7 @@
                                     <td>
                                             <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
                                                     <button type="button" onclick="edit('{{$l->id}}','{{$l->valor}}','{{$l->lanc_desc}}','{{$l->tipo}}','{{$l->reportdate}}','{{ Request()->ano }}')" data-toggle="modal" data-target="#editModal" style="float:right"class="btn btn-light btn-sm"><i class="fa fa-pen"></i></button>
-                                                    <button type="button" onclick="confirm('{{$l->id}}','{{ Request()->ano }}')" data-toggle="modal" data-target="#deleteModal"  class="btn btn-danger btn-sm"><i class="fa fa-times"></i></button>
+                                                    <button type="button" onclick="confirm('{{$l->id}}','{{ Request()->ano }}')" data-toggle="modal" data-target="#deleteModal"  class="btn btn-link btn-sm text-danger"><i class="fa fa-times"></i></button>
                                             </div>
                                     </td>
                                   </tr>
@@ -166,7 +166,7 @@
                 <div class="card-body text-muted">
                     <h5 class="card-title"><b>GRÁFICOS MONETÁRIOS </b> <i style="float:right; color:rgba(244, 66, 66)"class="fa fa-dollar-sign"></i></h5>
                     <p class="card-text">O gráfico abaixo indica a maior concentração em R$, separados por aplicações</p>
-                    <div class="card-text col-md-10">
+                    <div class="card-text col-md-11" style="padding-bottom:20px;">
                     <canvas id="doughnutChart" ></canvas>
                     </div>
                 </div>

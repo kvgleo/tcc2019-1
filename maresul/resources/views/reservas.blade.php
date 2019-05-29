@@ -2,7 +2,7 @@
 
 
 @section('title-content')
-<title>MARESUL- Regras de Convivência</title>
+<title>MAR AZUL- Regras de Convivência</title>
 
 @endsection
 
@@ -300,11 +300,7 @@
 @section('js-content')
 <script type="text/javascript">
 
-    $('.toast').toast('show');//exibir toast
 
-    $('#close').click(function(){
-        $("#toast").remove();
-    });
 
     function see(id) { //preencher card com informações ao clicar no botão
         switch(id){

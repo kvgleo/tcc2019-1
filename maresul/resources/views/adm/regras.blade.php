@@ -89,7 +89,7 @@
                         <div class="card-body">
                             <p class="text-right"> <button type="button" class="btn btn-primary btn-sm"><i class="fab fa-facebook-f"></i></button>  <button type="button" class="btn btn-success btn-sm"><i class="fab fa-whatsapp"></i></button>  <button type="button" class="btn btn-info btn-sm"><i class="fab fa-twitter"></i></button></p>
                             <p class="card-text">{!!$re->desc!!}</p>
-                            <footer class="blockquote-footer"> assinado por {{$re->author}},  pauta autorizada em {{date('d-m-Y', strtotime($re->reportdate))}}</footer>
+                            <footer class="blockquote-footer"> assinado por {{$re->author}},  pauta autorizada em {{date('d/m/Y', strtotime($re->reportdate))}}</footer>
                         </div>
                     </div>
                     <div id="c{{$re->id}}" class="collapse" aria-labelledby="ac{{$re->id}}" data-parent="#accordion">
@@ -243,13 +243,12 @@
         document.getElementById("autEdit").value = aut;
 
         var desc = {!! json_encode($regras)!!};
-        
-    
+   
         for(i=0;i<desc.data.length;i++){
             if(desc.data[i].id == id){
                 tinyMCE.get('descEdit').setContent(desc.data[i].desc);
             }
-                //tinyMCE.get('descEdit').setContent(desc[i].desc);
+               
             
         }
     }

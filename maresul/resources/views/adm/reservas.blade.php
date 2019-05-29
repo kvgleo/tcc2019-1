@@ -9,14 +9,14 @@
 @if(Session::has('msg'))
 <div class="position-absolute w-100 d-flex flex-column p-4 " id="toast">
         <div class="toast ml-auto alert-success" role="alert" data-autohide="false"  style="margin-top:7rem;">
-            <div class="toast-body alert-success"><i class="fa fa-check-circle mr-2"></i>{{ Session::get('msg') }}<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+            <div class="toast-body alert-success"><i class="fa fa-check-circle mr-2"></i>{{ Session::get('msg') }}<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close"><span id="close"aria-hidden="true">×</span></button></div>
         </div>
     </div>
 @endif
 @if(Session::has('avs'))
 <div class="position-absolute w-100 d-flex flex-column p-4 " id="toast">
         <div class="toast ml-auto alert-danger" role="alert" data-autohide="false"  style="margin-top:7rem;">
-            <div class="toast-body alert-danger"><i class="fa fa-times-circle mr-2"></i>{{ Session::get('avs') }}<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+            <div class="toast-body alert-danger"><i class="fa fa-times-circle mr-2"></i>{{ Session::get('avs') }}<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close"><span id="close" aria-hidden="true">×</span></button></div>
         </div>
     </div>
 @endif
@@ -37,9 +37,16 @@
                     </div>
                 </div>
           </nav>
-          <div id="testetable"class="card col-md-7 " style="margin-bottom:20px; float:left; background:none; border:none; ">
-            <input type="text" class="form-control" id="testeinput" placeholder="Pesquisar..." style="height:50px;">
-            <div class="card" style=" max-height:500px; overflow-y: auto; margin-top:10px;">
+          <div id="testetable"class="card col-md-7 " style="margin-bottom:20px; float:left; background:none; border:none; "> 
+             
+            <div class="input-group col-md-12" style="margin-top:10px; margin-bottom:10px;">
+                    <input class="form-control py-2 border-right-0 border" type="search" placeholder="Pesquisar..." id="searchinput">
+                    <span class="input-group-append">
+                        <div class="input-group-text bg-transparent"><i class="fa fa-search"></i></div>
+                    </span>
+                </div>
+    
+            <div class="card" style=" max-height:420px; overflow-y: auto; margin-top:10px;">
           <table class="table table-hover" style="">
               <thead>
                 <tr>
@@ -59,7 +66,7 @@
                         <td scope="col">{{date('d/m/Y', strtotime($r->created_at))}}</td>
                         <td scope="col">{{date('d/m/Y', strtotime($r->reportdate))}}</td>
                         <th scope="row">{{(Carbon\Carbon::now()>$r->reportdate)? "concluído" : "pendente" }}</th>
-                        <td scope="col"><button type="button" onclick="confirm('{{$r->id}}','{{$r->id_user}}')" class = "btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-times"></i></button> </td>
+                        <td scope="col"><button type="button" onclick="confirm('{{$r->id}}','{{$r->id_user}}')" class = "btn btn-link text-danger btn-sm" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-times"></i></button> </td>
                     </tr>
                     @endforeach
 
@@ -73,14 +80,14 @@
 
                 <div class="card col-md-12 " style=" float:left; margin-bottom: 10px;">
                 <div class="card-body">
-                    <h5 class="card-text" style="float:left;" > Concluídas<h2 style="float:right; color:rgba(244, 66, 66)" id="conc"> </h2> <h2 style="float:right; color:rgba(244, 66, 66); margin-right:10px;"><i class="fa fa-check-square"></i> </h2></h5>
+                    <h5 class="card-text" style="float:left;" > Concluídas<h2 style="float:right; color:rgba(244, 66, 66)" id="conc"> </h2> <h2 style="float:right; color:rgba(244, 66, 66); margin-right:10px;"><i class="far fa-check-square"></i> </h2></h5>
                   </div>
                   <div class="modal-footer">  {{$inicio[0]->num}} nova(s) hoje</div>
               </div>
 
                 <div class="card col-md-12 " style="float:left; margin-bottom: 10px;">
                   <div class="card-body" >
-                      <h5 class="card-text"style="float:left;" >  Pendentes <h2 style="float:right; color:rgba(244, 66, 66)" id="pen"></h2> <h2 style="float:right; color:rgba(244, 66, 66); margin-right:10px;"><i class="fa fa-clock"></i> </h2> </h5>
+                      <h5 class="card-text"style="float:left;" >  Pendentes <h2 style="float:right; color:rgba(244, 66, 66)" id="pen"></h2> <h2 style="float:right; color:rgba(244, 66, 66); margin-right:10px;"><i class="far fa-clock"></i> </h2> </h5>
                   </div>
                   <div class="modal-footer"> {{$fim[0]->num}} encerrada(s) hoje</div>
                 </div>
@@ -123,7 +130,7 @@
 
     
     $(document).ready(function(){
-      $("#testeinput").on("keyup", function() {
+      $("#searchinput").on("keyup", function() {
         var value = $(this).val().toLowerCase();
         $("#testetable tr").filter(function() {
           $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
@@ -161,11 +168,11 @@
     });
 });
 
-
     $('.toast').toast('show');
-    $("#toast").fadeToggle(4000, "swing",function(){ //remover toast
-        this.remove();
-    });
+
+$('#close').click(function(){
+    $("#toast").remove();
+});
 
     function confirm(id,id2){
 

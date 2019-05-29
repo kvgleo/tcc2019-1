@@ -64,7 +64,8 @@
                     
                 <div class="list-group" id="listinha" role="tablist">
                     @foreach($lembretes as $l)
-                        <a class="list-group-item  list-group-item-action">{{$l->lemb_title}} <small class="text-muted"> ( há {{Carbon\Carbon::parse($l->created_at)->diffForHumans(date(now())) }} ) </small>
+                        
+                        <a class="list-group-item  list-group-item-action"> <i class="far fa-bookmark"></i> {{$l->lemb_title}} <small class="text-muted"> ( há {{Carbon\Carbon::parse($l->created_at)->diffForHumans(date(now())) }} ) </small>
                         @if(Carbon\Carbon::parse($l->created_at)->startOfDay()==Carbon\Carbon::now()->startOfDay())
                         <span class="badge badge-danger">NOVO</span>
                         @endif
@@ -85,7 +86,7 @@
             @foreach($lembretes as $l)
             <div class="card col-md-6 infos" style="margin-bottom:20px; margin-top:10px;display:none;" id="{{$l->id}}">
                 <div class="card-body">
-                    <h5 class="card-title"><b>{{$l->lemb_title}}</b> <i style="float:right"class="fa fa-bookmark"></i></h5>
+                    <h5 class="card-title"><b>{{$l->lemb_title}}</b> <i style="float:right"class="far fa-bookmark"></i></h5>
                     <hr>
                     <p class="card-text"> {!!$l->lemb_desc!!}</p>
                     

@@ -66,7 +66,7 @@ Route::get('/regras', 'RegrasC@index')->middleware('auth:web,admin')->name('regr
 Route::post('/regras', 'RegrasC@store')->middleware('auth:admin')->name('regras_criar'); //armazenar nova regra
 Route::get('/regras/del/{id}', 'RegrasC@destroy')->middleware('auth:admin')->name('regras_del'); //deletar regra
 Route::post('/regras/edit/{id}', 'RegrasC@update')->middleware('auth:admin')->name('regras_edit'); //atualizar regra
-Route::get('/regras/buscar', 'RegrasC@search')->middleware('auth:admin,web')->name('buscar_regra'); //pesquisar regra
+Route::get('/regras/buscar', 'RegrasC@search')->middleware('auth:web')->name('buscar_regra'); //pesquisar regra
 
 //rotas para ajuda:
 
@@ -74,7 +74,7 @@ Route::get('/ajuda', 'PerguntasC@index')->middleware('auth:web,admin')->name('aj
 Route::post('/ajuda', 'PerguntasC@store')->middleware('auth:admin')->name('pergunta_criar'); //armazenar nova pergunta
 Route::get('/ajuda/del/{id}', 'PerguntasC@destroy')->middleware('auth:admin')->name('pergunta_del'); //deletar pergunta
 Route::post('/ajuda/edit/{id}', 'PerguntasC@update')->middleware('auth:admin')->name('pergunta_edit'); //atualizar pergunta
-Route::get('/ajuda/buscar', 'PerguntasC@search')->middleware('auth:admin,web')->name('buscar_ajuda'); //pesquisar ajuda
+Route::get('/ajuda/buscar', 'PerguntasC@search')->middleware('auth:web')->name('buscar_ajuda'); //pesquisar ajuda
 
 //rotas para despesas:
 
@@ -97,3 +97,21 @@ Route::get('/status/{tipo}/{id}', 'UsersC@inp')->middleware('auth:admin')->name(
 Route::post('/comunidade/edit/{id}', 'UsersC@update')->middleware('auth:admin,web')->name('edit_users');
 Route::get('/comunidade/del/{id}', 'UsersC@destroy')->middleware('auth:admin')->name('del_users');
 
+//rotas para mural:
+
+Route::get('/recados', 'RecadosC@index')->middleware('auth:admin')->name('recados');
+Route::post('/recados', 'RecadosC@store')->middleware('auth:web')->name('novo_recado');
+Route::get('/recados/del/{id}', 'RecadosC@destroy')->middleware('auth:admin')->name('del_recados');
+
+//rotas para forum
+
+Route::get('/forum', 'TopicosC@index')->middleware('auth:admin,web')->name('forum');
+Route::post('/forum/cat', 'CategoriasC@store')->middleware('auth:admin')->name('nova_categoria');
+Route::post('/forum/cat/edit/{id}', 'CategoriasC@update')->middleware('auth:admin')->name('edit_cat');
+Route::get('/forum/cat/del/{id}', 'CategoriasC@destroy')->middleware('auth:admin')->name('del_cat');
+Route::get('/forum/topico/{id}', 'TopicosC@topico')->middleware('auth:admin,web')->name('topico');
+Route::post('/forum/topico', 'TopicosC@store')->middleware('auth:admin,web')->name('novo_topico');
+Route::get('/forum/topico/del/{id}', 'TopicosC@destroy')->middleware('auth:admin,web')->name('del_top');
+Route::post('/forum/topico/edit/{id}', 'TopicosC@update')->middleware('auth:admin,web')->name('edit_top');
+Route::get('/forum/buscar', 'TopicosC@search')->middleware('auth:web')->name('buscar_topico');
+Route::get('/forum/encerrar/{id}', 'TopicosC@close')->middleware('auth:admin')->name('close_top');

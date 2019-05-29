@@ -65,7 +65,7 @@
               <div class="col-12">
                 <div class="list-group" id="listinha" role="tablist">
                     @foreach($docs as $d)
-                        <a class="list-group-item  list-group-item-action">{{$d->doc_title}} <small class="text-muted"> ( há {{Carbon\Carbon::parse($d->created_at)->diffForHumans(date(now())) }} ) </small>
+                        <a class="list-group-item  list-group-item-action"> <i class="far fa-file"></i> {{$d->doc_title}} <small class="text-muted"> ( há {{Carbon\Carbon::parse($d->created_at)->diffForHumans(date(now())) }} ) </small>
                             @if(Carbon\Carbon::parse($d->created_at)->startOfDay()==Carbon\Carbon::now()->startOfDay())
                             <span class="badge badge-danger">NOVO</span>
                             @endif
@@ -87,7 +87,7 @@
             @foreach($docs as $d)
             <div class="card col-md-6 infos" style="margin-bottom:20px; display:none;" id="{{$d->id}}">
                 <div class="card-body">
-                    <h5 class="card-title"><b>{{$d->doc_title}}</b> <i style="float:right"class="fa fa-file"></i></h5>
+                    <h5 class="card-title"><b>{{$d->doc_title}}</b> <i style="float:right" class="far fa-file"></i></h5>
                     <p class="card-text"> {{$d->doc_desc}}</p>
                 </div>
                 <div class="modal-footer">

@@ -6,6 +6,25 @@
     
 @endsection
 
+@section('warn-content')
+
+@if(Session::has('msg'))
+<div class="position-absolute w-100 d-flex flex-column p-4 " id="toast">
+        <div class="toast ml-auto alert-success" role="alert" data-autohide="false" style="margin-top:7rem" >
+            <div class="toast-body alert-success"><i class="fa fa-check-circle mr-2"></i>{{ Session::get('msg') }}<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close"><span id="close" aria-hidden="true">×</span></button></div>
+        </div>
+    </div>
+@endif
+
+@if(Session::has('avs'))
+<div class="position-absolute w-100 d-flex flex-column p-4 " id="toast">
+        <div class="toast ml-auto alert-danger" role="alert" data-autohide="false" >
+            <div class="toast-body alert-danger"><i class="fa fa-times-circle mr-2"></i> {{ Session::get('avs') }}<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close"><span id="close" aria-hidden="true">×</span></button></div>
+        </div>
+</div>
+@endif
+@endsection
+
 @section('main-content')
 
 

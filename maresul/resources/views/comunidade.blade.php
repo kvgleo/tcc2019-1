@@ -119,21 +119,25 @@
                                         @endforeach
                                         @foreach($users as $u)
 
-                                        <div class="item">
-                                                <div class="pad15">
-                                                    <p class="lead">  <button type="button" style = "margin-right:5px; margin-top:5px; margin-bottom: 5px; float:right"class="btn btn-primary btn-sm"> <i class="fa fa-comment-dots"></i></button></p>
-                                                    <div class="card  col-md-12"  style="margin-bottom: 10px;">
-                                                        <div class="col-md-12">
-                                                            <div class="card-body">
-                                                            <img src="{{Storage::url('user_img/userpic.png') }}" class="img-thumbnail card-img" style="margin-bottom:5px;">
-                                                            <h5 class="card-text">{{$u->name}}</h5>
-                                                            <p class="card-text">Apto, Nº {{$u->apto}}</p>
-                                                            <p class="card-text"><small class="text-muted">{{$u->email}} </small></p>
+                                        @if($u->id == Auth::user()->id)
+                                        
+                                        @else
+                                            <div class="item">
+                                                    <div class="pad15">
+                                                        <p class="lead">  <button type="button" style = "margin-right:5px; margin-top:5px; margin-bottom: 5px; float:right"class="btn btn-primary btn-sm"> <i class="fa fa-comment-dots"></i></button></p>
+                                                        <div class="card  col-md-12"  style="margin-bottom: 10px;">
+                                                            <div class="col-md-12">
+                                                                <div class="card-body">
+                                                                <img src="{{Storage::url('user_img/userpic.png') }}" class="img-thumbnail card-img" style="margin-bottom:5px;">
+                                                                <h5 class="card-text">{{$u->name}}</h5>
+                                                                <p class="card-text">Apto, Nº {{$u->apto}}</p>
+                                                                <p class="card-text"><small class="text-muted">{{$u->email}} </small></p>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        </div>
+                                                            </div>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            @endif
                                             @endforeach
                                     
                                     </div>
