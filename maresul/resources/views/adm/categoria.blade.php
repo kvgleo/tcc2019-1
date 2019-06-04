@@ -31,7 +31,8 @@
     <nav aria-label="breadcrumb" style="margin-top:-25px;">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
-            <li class="breadcrumb-item active" >Fórum</li>
+            <li class="breadcrumb-item active" ><a href="/forum">Fórum</a></li>
+            <li class="breadcrumb-item active" >{{$ct->nome}} </li>
         </ol>
         <div class="card" style="margin-bottom:20px;">
             <div class="card-body text-secondary">
@@ -55,7 +56,7 @@
                 </div>
             </div>
         @endif
-        <div id="tops" class="card" style=" background:none; border:none; max-height:420px; overflow-y: auto; margin-top:10px;">
+        <div id ="tops" class="card" style=" background:none; border:none; max-height:420px; overflow-y: auto; margin-top:10px;">
 
             @foreach($topicos as $top)
             <div class="card  col-md-12"  style="margin-bottom: 10px;">
@@ -63,16 +64,17 @@
                     <div class="col-md-12">
                         <div class="card-body">
                              <h5 class="card-title"><b>{{$top->top_titulo}} </b> @if($top->status_top == false) <span class="badge badge-danger">ABERTO <i class="fa fa-unlock"></i> </span> @else  <span class="badge badge-secondary">FECHADO <i class="fa fa-lock"></i></span> @endif  </h5>
-                            <h6 class="card-subtitle mb-2 text-muted"> <small>por @if($top->admin_post==false)<b> {{$top->author}} </b> @else <b class="text-danger"> {{$top->author}} </b> @endif , postado em 21/05/2019 -  <b>{{$top->cat}} </b></small></h6>
+                            <h6 class="card-subtitle mb-2 text-muted"> <small>por @if($top->admin_post==false)<b> {{$top->author}} </b> @else <b class="text-danger"> {{$top->author}} </b> @endif , postado em 21/05/2019 -  <b>{{$ct->nome}} </b></small></h6>
                             <p class="card-text text-muted">
                                 <i class="fa fa-eye"></i> {{$top->top_views}} visitas |
                                 <i class="far fa-thumbs-up"></i> {{$top->votos}}  votos |
                                 <i class="far fa-comments"></i> {{$top->comentarios}}  respostas |
-                                <i class="far fa-clock"></i> há {{Carbon\Carbon::parse($top->created_at)->diffForHumans(date(now())) }}       
-                                <a href="/forum/topico/{{$top->id}} " class="btn btn-danger float-right">Entrar <i class="fa fa-angle-right"></i> </a>                             
+                                <i class="far fa-clock"></i> há {{Carbon\Carbon::parse($top->created_at)->diffForHumans(date(now())) }}   
+                                <a href="/forum/topico/{{$top->id}} " class="btn btn-danger float-right">Entrar <i class="fa fa-angle-right"></i> </a>  
                             </p>
                         </div>
                     </div>
+
                 </div>
             </div>
         <!-- CARD-->   
@@ -87,7 +89,7 @@
                 <ul class="list-group list-group-flush">
                     @foreach($categorias as $cat)
                         <li class="list-group-item">
-                            <a href="{{route('categoria', ['id' => $cat->id])}} " class="text-danger" data-trigger="hover" data-boundary="window" data-toggle="popover" data-placement="left" data-content="{{$cat->cat_desc}}">{{$cat->nome}} </a> 
+                            <a href="{{route('categoria', ['id' => $cat->id])}}" class="text-danger" data-trigger="hover" data-boundary="window" data-toggle="popover" data-placement="left" data-content="{{$cat->cat_desc}}">{{$cat->nome}} </a> 
                             <button type="button" onclick="confirm('{{route('del_cat', ['id' => $cat->id])}}')" style="float: right;" class="btn btn-link btn-sm text-danger" data-toggle="modal" data-target="#deleteModal"> <i class="fa fa-times"></i></button>
                             <button type="button" onclick="edit('{{$cat->nome}}','{{$cat->cat_desc}}','{{route('edit_cat', ['id' => $cat->id])}}')" style="float: right;"  class="btn btn-link btn-sm text-secondary"  data-toggle="modal" data-target="#editModal"><i class="fa fa-pen"></i></button>
                         </li>

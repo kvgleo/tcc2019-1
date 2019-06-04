@@ -113,7 +113,7 @@
                                 @endif
                                 <td scope="col"> 
                                 <button type="button" class="btn btn-light btn-sm"><i class="fa fa-pen"  onclick="edit('{{$u->email}}','{{$u->apto}}','{{$u->name}}','{{route('edit_users', ['id' => $u->id])}}')"  data-toggle="modal" data-target="#editModal"></i></button>
-                                     <button type="button" class="btn btn-danger btn-sm" onclick="confirm('{{route('del_users', ['id' => $u->id])}}')" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-times"></i></button>
+                                     <button type="button" class="btn btn-link text-danger btn-sm" onclick="confirm('{{route('del_users', ['id' => $u->id])}}')" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-times"></i></button>
                                 </td>
 
                               </tr>

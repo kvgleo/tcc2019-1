@@ -9,31 +9,32 @@ use App\User;
 use App\Categoria;
 use Auth;
 use App\Admin;
+use App\Voto;
 
 class TopicosC extends Controller
 {
     
     public function index(){
        
-        $categorias= DB::table('Categorias')->get();  
+            $categorias= DB::table('Categorias')->get();  
+            $votos = Voto::select('id_author','id_post')->distinct()->orderBy('id_author')->get();
+
 
         try{
             $auth= Auth::user()->isAdmin;
 
             if($auth==true){ //retornar view para admin     
-                $topicos = new Topico();
                 $topicos= DB::table('topicos')
-                ->join('categorias', 'categorias.id', '=', 'topicos.id_cat',)
+                ->join('categorias', 'categorias.id', '=', 'topicos.id_cat')
                 ->select('topicos.*','categorias.nome as cat')->Orderby('topicos.created_at','desc')->get();
 
-                return view('adm.forum',compact('categorias','topicos'));
+                return view('adm.forum',compact('categorias','topicos','votos'));
 
             }else{ //retornar view para usuario
-                $topicos = new Topico();
                 $topicos= DB::table('topicos')
-                ->join('categorias', 'categorias.id', '=', 'topicos.id_cat',)
+                ->join('categorias', 'categorias.id', '=', 'topicos.id_cat')
                 ->select('topicos.*','categorias.nome as cat')->Orderby('topicos.created_at','desc')->paginate(10);
-                return view('forum',compact('categorias','topicos'));
+                return view('forum',compact('categorias','topicos','votos'));
             }
         }catch(\Exception $e){ //burlar acesso redireciona para página de login
 
@@ -47,6 +48,7 @@ class TopicosC extends Controller
         $categorias= DB::table('Categorias')->get();
         $auth= Auth::user()->isAdmin;
         $topicos= DB::table('topicos')->get();
+        $comentarios = DB::table('comentarios')->where('id_top','=',$id)->orderBy('created_at','desc')->get();
 
         try{
             if($top->admin_post==true){
@@ -56,9 +58,9 @@ class TopicosC extends Controller
                 $cat= Categoria::find($top->id_cat);
                 $admin = Admin::where('name', 'like',$top->author)->first();
                 if($auth==true){
-                    return view('adm.topico',compact('top','admin','cat','categorias','topicos'));
+                    return view('adm.topico',compact('top','admin','cat','categorias','topicos','comentarios'));
                 }else{
-                    return view('topico',compact('top','admin','cat','categorias','topicos'));
+                    return view('topico',compact('top','admin','cat','categorias','topicos','comentarios'));
                 }
             }else{
                 $top->top_views++;
@@ -66,9 +68,9 @@ class TopicosC extends Controller
                 $cat= Categoria::find($top->id_cat);
                 $user = User::where('name', 'like',$top->author)->first();
                 if($auth==true){
-                    return view('adm.topico',compact('top','user','cat','categorias','topicos'));
+                    return view('adm.topico',compact('top','user','cat','categorias','topicos','comentarios'));
                 }else{
-                    return view('topico',compact('top','user','cat','categorias','topicos'));
+                    return view('topico',compact('top','user','cat','categorias','topicos','comentarios'));
                 }
             }
         }catch(\Exception $e){ 
@@ -92,6 +94,8 @@ class TopicosC extends Controller
                 $top->top_titulo= $request->input('top_tit');
                 $top->artigo= $request->input('artigo');
                 $top->top_views= 0;
+                $top->votos=0;
+                $top->comentarios=0;
                 $top->id_cat = $cat->id;
                 $top->admin_post = true;
                 $top->status_top = false;
@@ -103,6 +107,8 @@ class TopicosC extends Controller
                 $top->top_titulo= $request->input('top_tit');
                 $top->artigo= $request->input('artigo');
                 $top->top_views= 0;
+                $top->votos = 0;
+                $top->comentarios= 0;
                 $top->id_cat = $cat->id;
                 $top->admin_post = false;
                 $top->status_top = false;
@@ -159,6 +165,22 @@ class TopicosC extends Controller
         return redirect()->route('topico', ['id' => $top->id])->with('avs','Tópico marcado como encerrado');
     }
 
+    public function categoria($id){
+        $auth= Auth::user()->isAdmin;
+        $ct = Categoria::find($id);
+        $categorias= DB::table('Categorias')->get();  
+        $votos = Voto::select('id_author','id_post')->distinct()->orderBy('id_author')->get();
+
+        if($auth==true){
+            $topicos= Topico::where('id_cat','=',$id)->get();
+            return view('adm.categoria',compact('ct','categorias','topicos','votos'));
+        }else{
+            $topicos= Topico::where('id_cat','=',$id)->paginate(10);
+            return view('categoria',compact('ct','categorias','topicos','votos'));
+        }
+
+    }
+
         public function update(Request $request,$id){
             
             $top = Topico::find($id);
@@ -191,7 +213,6 @@ class TopicosC extends Controller
                             }
                     }
                 }
-                return ('ok');
             }catch(\Exception $e){
                 return  redirect('/forum')->with('avs','Não foi atualizar o item desejado.');
             } 
@@ -204,7 +225,7 @@ class TopicosC extends Controller
             }
             $categorias = new Categoria();
             $categorias= DB::table('Categorias')->get(); 
-
+            $votos = Voto::select('id_author','id_post')->distinct()->orderBy('id_author')->get();
             $word=$request->input('buscar');
 
             $topicos= DB::table('topicos')
@@ -215,8 +236,7 @@ class TopicosC extends Controller
                 'buscar' => $request->input('buscar')
                 ) );         
             
-                return view('forum',compact('topicos','categorias'))->with('src','busca');
-    
+                return view('forum',compact('topicos','categorias','votos'))->with('src','busca');
         }
 }
 

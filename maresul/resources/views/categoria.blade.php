@@ -38,7 +38,7 @@
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="/home">Menu principal</a></li>
         <li class="breadcrumb-item "><a href="/forum" class="text-secondary">Forum </a></li>
-        @if(!empty($cat_pag)) | <li class="breadcrumb-item "><a href="/forum" class="text-secondary">{{$ct->nome}} </a></li>  @else  @endif
+        <li class="breadcrumb-item active ">{{$ct->nome}} </li>
     </ol>
 </nav>
 
@@ -117,17 +117,22 @@
                             
                             </div>
                         </div>
-                        <div class="col-md-11">
+                        <div class="col-md-9">
                             <div class="card-body">
                                     <h5 class="card-title"> <b>{{$top->top_titulo}} </b> @if($top->status_top == false)  <span class="badge badge-primary">ABERTO <i class="fa fa-unlock"></i> </span> @else <span class="badge badge-secondary">FECHADO <i class="fa fa-lock"></i> </span>  @endif</h5>
-                                <h6 class="card-subtitle mb-2 text-muted"> <small>por @if($top->admin_post==false)<b> {{$top->author}} </b> @else <b class="text-primary"> {{$top->author}} </b> @endif , postado em {{date('d/m/Y', strtotime($top->created_at))}} -  <b>{{$top->cat}} </b></small></h6>
+                                <h6 class="card-subtitle mb-2 text-muted"> <small>por @if($top->admin_post==false)<b> {{$top->author}} </b> @else <b class="text-primary"> {{$top->author}} </b> @endif , postado em {{date('d/m/Y', strtotime($top->created_at))}} -  <b>{{$ct->nome}} </b></small></h6>
                                 <p class="card-text text-muted">
                                     <i class="fa fa-eye"></i> {{$top->top_views}} visitas |
                                     <i class="far fa-comments"></i> {{$top->comentarios}} respostas |
                                     <i class="far fa-clock"></i>  há {{Carbon\Carbon::parse($top->created_at)->diffForHumans(date(now())) }} 
-                                    <a href="/forum/topico/{{$top->id}}" class="btn btn-primary float-right">Entrar <i class="fa fa-angle-right"></i> </a>
+                                    
                                 </p>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="card-body">
                                 
+                                <a href="/forum/topico/{{$top->id}} " style="margin-top:20px" class="btn btn-primary float-right">Entrar <i class="fa fa-angle-right"></i> </a>
                             </div>
                         </div>
                     </div>
@@ -147,7 +152,7 @@
         <ul class="list-group list-group-flush">
             @foreach($categorias as $cat)
                 <li class="list-group-item">
-                    <a href="{{route('categoria', ['id' => $cat->id]) }}" class="text-primary" data-trigger="hover" data-boundary="window" data-toggle="popover" data-placement="left" data-content="{{$cat->cat_desc}}">{{$cat->nome}} </a> 
+                    <a href="{{route('categoria', ['id' => $cat->id])  }}" class="text-primary" data-trigger="hover" data-boundary="window" data-toggle="popover" data-placement="left" data-content="{{$cat->cat_desc}}">{{$cat->nome}} </a> 
                 </li>
             @endforeach
         </ul>

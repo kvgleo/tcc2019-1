@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateVotosTable extends Migration
+class CreateComentariosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,13 @@ class CreateVotosTable extends Migration
      */
     public function up()
     {
-        Schema::create('votos', function (Blueprint $table) {
+        Schema::create('comentarios', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('id_author')->unsigned();
-            $table->foreign('id_author')->references('id')->on('users');
-            $table->bigInteger('id_post')->unsigned();
-            $table->foreign('id_post')->references('id')->on('topicos');
+            $table->longtext('mensagem');
+            $table->boolean('admin_c');
+            $table->string('author');
+            $table->bigInteger('id_top')->unsigned();
+            $table->foreign('id_top')->references('id')->on('topicos');
             $table->timestamps();
         });
     }
@@ -30,6 +31,6 @@ class CreateVotosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('votos');
+        Schema::dropIfExists('comentarios');
     }
 }

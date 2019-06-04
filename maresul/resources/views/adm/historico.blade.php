@@ -59,7 +59,7 @@
     @else
 
         <div class="card col-md-6 " style="margin-bottom:20px; float:left; background:none; border:none;">
-            <h4 ><b>Histórico de {{Request()->ano}}</b> <button style="float: right" class="btn btn-danger"> imprimir <i class="fa fa-print"></i></button></h4>
+            <h4 ><b>Histórico de {{Request()->ano}}</b> <a href="{{route('listagem', ['ano' => Request()->ano])}}" style="float: right" class="btn btn-danger"> imprimir <i class="fa fa-print"></i></a></h4>
             <!--<button onClick="window.print()">Print this page</button>-->
 
                 @if(12-count($meses) == 0)
@@ -144,7 +144,7 @@
                                   <tr>
                                     <td scope="col">{{date('d/m/Y', strtotime($l->reportdate))}} </td>
                                     <td scope="col">{{$l->lanc_desc}}</td>
-                                    <td scope="row"><b>{{$l->valor}}</b></td>
+                                    <td scope="row"><b>R$ {{number_format($l->valor,2,",",".")}}</b></td>
                                     <td scope="col">{{$l->tipo}}</td>
                                     <td>
                                             <div class="btn-group" role="group" aria-label="Button group with nested dropdown">

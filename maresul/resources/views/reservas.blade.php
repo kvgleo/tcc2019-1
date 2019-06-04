@@ -75,7 +75,7 @@
                     <h5 class="card-title"><b  id="title_local">Quadra de Esportes</b></h5>
                     <p class="card-text" id="desc_local">Reserve a quadra se você busca um dia para praticar esportes com os amigos ou atividades físicas!</p>
                 </div>
-                <div class="modal-footer" id="nota_local"> Nota:  <i class='fa fa-star' style='color:#3a79e0;'></i> <i class='fa fa-star'  style='color:#3a79e0;'></i> <i class='fa fa-star'  style='color:#3a79e0;''></i> <i class='fa fa-star' style='color:grey'></i>  </div>
+                <div class="modal-footer" id="nota_local"> Nota:  <i class='fa fa-star' style='color:#3a79e0;'></i> <i class='fa fa-star'  style='color:#3a79e0;'></i> <i class='fa fa-star'  style='color:#3a79e0;'></i> <i class='fa fa-star' style='color:grey'></i>  </div>
             </div>
         </div>
 
@@ -305,7 +305,6 @@
     function see(id) { //preencher card com informações ao clicar no botão
         switch(id){
             case 'l1':
-            console.log('oi');
                 document.getElementById('img').src="{{Storage::url('res_imgs/quadra.jpg') }}";
                 title_local.innerText = "Quadra de Esportes";
                 desc_local.innerText = "Reserve a quadra se você busca um dia para praticar esportes com os amigos ou atividades físicas!";

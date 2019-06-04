@@ -84,6 +84,7 @@ Route::get('/historico', 'DespesasC@historico_red')->middleware('auth:admin')->n
 Route::get('/historico/{ano}', 'DespesasC@historico')->middleware('auth:admin')->name('historico'); //deletar pergunta
 Route::post('/historico/edit/{id}/{ano}', 'DespesasC@update')->middleware('auth:admin')->name('despesa_del'); //deletar registro
 Route::get('/historico/del/{id}/{ano}', 'DespesasC@destroy')->middleware('auth:admin')->name('despesa_del'); //deletar registro
+Route::get('/historico/list/{ano}', 'DespesasC@list')->middleware('auth:admin')->name('listagem'); //deletar registro
 
 //rotas para estatisticas:
 
@@ -115,3 +116,9 @@ Route::get('/forum/topico/del/{id}', 'TopicosC@destroy')->middleware('auth:admin
 Route::post('/forum/topico/edit/{id}', 'TopicosC@update')->middleware('auth:admin,web')->name('edit_top');
 Route::get('/forum/buscar', 'TopicosC@search')->middleware('auth:web')->name('buscar_topico');
 Route::get('/forum/encerrar/{id}', 'TopicosC@close')->middleware('auth:admin')->name('close_top');
+Route::get('/forum/voto/{id}', 'VotosC@votar')->middleware('auth:web')->name('voto');
+Route::post('/forum/comentario/{id}', 'ComentariosC@store')->middleware('auth:web,admin')->name('novo_comment');
+Route::get('/forum/del/comentario/{id}/{id_top}', 'ComentariosC@destroy')->middleware('auth:web,admin')->name('del_comment');
+Route::post('/forum/edit/comentario/{id}/{id_top}', 'ComentariosC@update')->middleware('auth:web,admin')->name('edit_comment');
+Route::get('/forum/buscar', 'TopicosC@search')->middleware('auth:web')->name('buscar_topico');
+Route::get('/forum/categoria/{id}', 'TopicosC@categoria')->middleware('auth:web,admin')->name('categoria');

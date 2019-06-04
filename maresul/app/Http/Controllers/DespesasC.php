@@ -105,9 +105,16 @@ class DespesasC extends Controller
         }
     }
 
+    public function list($ano){
+        $lancamentos = DB::table('lancamentos')->whereYear('reportdate', '=', $ano)->OrderBy('created_at','desc')->get();
+        return view('adm.hist-list',compact('lancamentos'));
+
+        
+    }
+
     public function historico($ano){ //precisa de um ano para ser exibido o historico;
 
-        $anos = Lancamento::select(DB::raw('YEAR(reportdate) as ano'))->distinct()->orderBy('reportdate','desc')->get();
+        $anos = Lancamento::select(DB::raw('YEAR(reportdate) as ano'))->distinct()->orderBy('reportdate','asc')->get();
 
         $meses = Lancamento::select(DB::raw('month(reportdate) as mesl'))->distinct()->whereYear('reportdate','=',$ano)->orderBy('reportdate','asc')->get();
 

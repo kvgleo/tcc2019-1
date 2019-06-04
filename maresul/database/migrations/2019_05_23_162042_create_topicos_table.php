@@ -22,6 +22,8 @@ class CreateTopicosTable extends Migration
             $table->foreign('id_cat')->references('id')->on('categorias');
             $table->integer('top_views');
             $table->boolean('status_top');
+            $table->integer('votos');
+            $table->integer('comentarios');
             $table->timestamps();
         });
     }
