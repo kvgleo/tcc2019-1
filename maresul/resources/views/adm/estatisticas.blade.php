@@ -265,15 +265,14 @@
         </div>
 
         <div class="col-md-6" style="margin-bottom:15px;"> 
-                <div class="card col-md-12" >
-                        <div class="card-body">
-                            <h5 class="card-title">Despesas Anuais</h5>
-                            <h6 class="card-subtitle text-muted">Veja a quantia total de suas despesas separadas por categoria anual.</h6>
-                            <p class="card-text "><canvas id="bChart" style="position: relative; height: 27vh"></canvas></p>
-                            <p></p>
-                        </div>
-                        </div>
-
+            <div class="card col-md-12" >
+                <div class="card-body">
+                    <h5 class="card-title">Despesas Anuais</h5>
+                    <h6 class="card-subtitle text-muted">Veja a quantia total de suas despesas separadas por categoria anual.</h6>
+                    <p class="card-text "><canvas id="bChart" style="position: relative; height: 27vh"></canvas></p>
+                    <p></p>
+                </div>
+            </div>
         </div>
     </div>
 

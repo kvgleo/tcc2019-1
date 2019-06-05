@@ -90,8 +90,8 @@
                     </div>
                     <div id="c{{$p->id}}" class="collapse" aria-labelledby="ac{{$p->id}}" data-parent="#accordion">
                         <div class="modal-footer">
-                            <a id="editar" href="" class="btn btn-light" onclick="edit('{{$p->id}}','{{$p->question}}', '{{route('pergunta_edit', ['id' => $p->id])}}')"  data-toggle="modal" data-target="#editModal"><i class="fa fa-pen"></i></a>
-                            <button type="button" class="btn btn-danger"onclick="confirm('{{route('pergunta_del', ['id' => $p->id])}}')" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash"></i></button>
+                            <button type="button" id="editar" class="btn btn-light btn-sm" onclick="edit('{{$p->id}}','{{$p->question}}', '{{route('pergunta_edit', ['id' => $p->id])}}')"  data-toggle="modal" data-target="#editModal"><i class="fa fa-pen"></i></button>
+                            <button type="button" class="btn btn-danger btn-sm"onclick="confirm('{{route('pergunta_del', ['id' => $p->id])}}')" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash"></i></button>
                         </div>
                     </div>
                 </div>
@@ -231,7 +231,6 @@
     }
 
     function edit(id,perg,str){ //enviar campos para formulario de edição
-
         document.getElementById("formEdit").action = str;
         document.getElementById("pergEdit").value = perg;
         var desc = {!! json_encode($perguntas)!!};

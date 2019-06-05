@@ -19,7 +19,7 @@ class LembretesC extends Controller{
   
     }
 
-    public function store(Request $request) //criar novo anuncio
+    public function store(Request $request, $id) //criar novo anuncio
     {
         $lembrete = new Lembrete();
 
@@ -27,12 +27,14 @@ class LembretesC extends Controller{
         $lembrete->lemb_desc= $request->input('lemb_desc');
         $lembrete->reportdate= Carbon::now();
         $lembrete->save();
+
+        if ($id == 1){
         return  redirect('/lembretes')->with('msg', 'Um novo lembrete foi adicionado!');
+        }else{
+            return  redirect('/dashboard')->with('msg', 'Um novo lembrete foi adicionado!');
+        }
     }
 
-    public function teste(){
-        return view('adm.teste');
-    }
 
     public function update(Request $request, $id){
         $lembrete = Lembrete::find($id);

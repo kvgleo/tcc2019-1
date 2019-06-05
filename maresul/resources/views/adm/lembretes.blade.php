@@ -1,7 +1,7 @@
 @extends('adm.template.main')
 
 @section('title-content')
-<title>MARESUL- Regras de Convivência</title>
+<title>MAR AZUL- Lembretes</title>
 
 @endsection
 @section('warn-content')
@@ -9,14 +9,14 @@
 @if(Session::has('msg'))
 <div class="position-absolute w-100 d-flex flex-column p-4 " id="toast">
         <div class="toast ml-auto alert-success" role="alert" data-autohide="false"  style="margin-top:7rem;">
-            <div class="toast-body alert-success"><i class="fa fa-check-circle mr-2"></i>{{ Session::get('msg') }}<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+            <div class="toast-body alert-success"><i class="fa fa-check-circle mr-2"></i>{{ Session::get('msg') }}<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close"><span id="close"aria-hidden="true">×</span></button></div>
         </div>
     </div>
 @endif
 @if(Session::has('avs'))
 <div class="position-absolute w-100 d-flex flex-column p-4 " id="toast">
         <div class="toast ml-auto alert-danger" role="alert" data-autohide="false"  style="margin-top:7rem;">
-            <div class="toast-body alert-danger"><i class="fa fa-times-circle mr-2"></i>{{ Session::get('avs') }}<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+            <div class="toast-body alert-danger"><i class="fa fa-times-circle mr-2"></i>{{ Session::get('avs') }}<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close"><span id="close"aria-hidden="true">×</span></button></div>
         </div>
     </div>
 @endif
@@ -152,7 +152,7 @@
                 <h4 class="modal-title">NOVA NOTA</h4>
                 </div>
                 <div class="modal-body">
-                    <form id="formLem" action="/lembretes" method="POST">
+                    <form id="formLem" action="/lembretes/1" method="POST">
                         @csrf
                         <div class="form-group">
                             <label for="lemb_tit" >Título</label>
@@ -207,9 +207,10 @@
     });
 
     $('.toast').toast('show');
-    $("#toast").fadeToggle(4000, "swing",function(){ //remover toast
-        this.remove();
-    });
+
+$('#close').click(function(){
+    $("#toast").remove();
+});
 
       $(function() {
     $('#lembretes').addClass('btn-danger');

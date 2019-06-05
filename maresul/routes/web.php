@@ -31,14 +31,12 @@ Route::get('/dashboard', 'AdminC@index')->middleware('auth:admin')->name('admin_
 //lembretes
 Route::get('/lembretes', 'LembretesC@index')->middleware('auth:admin')->name('admin_lembretes'); //pagina de lembretes
 
-Route::post('/lembretes', 'LembretesC@store')->middleware('auth:admin')->name('admin_lembretes_submit'); //armazenar lembrete
+Route::post('/lembretes/{id}', 'LembretesC@store')->middleware('auth:admin')->name('admin_lembretes_submit'); //armazenar lembrete
 
 Route::get('/lembretes/del/{id}', 'LembretesC@destroy')->middleware('auth:admin')->name('admin_lembretes_del'); //deletar lembrete
 
 Route::post('/lembretes/edit/{id}', 'LembretesC@update')->middleware('auth:admin')->name('admin_lembretes_edit'); //atualizar lembrete
-//ajuda
 
-Route::get('/teste', 'LembretesC@teste')->middleware('auth:admin')->name('teste'); //deletar lembrete
 
 //rotas para anuncios:
 
